@@ -1,6 +1,6 @@
 # Vibe-Client
 
-Vibe dating suggestions app frontend, built with React. 
+Vibe is a dating suggestions app (full-stack). Its frontend is built with React and Redux. 
 
 **API details we need.**
 
