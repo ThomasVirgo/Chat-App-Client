@@ -1,11 +1,36 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Account, LandingPage, Login, Recommendations, Register, SearchResults } from "./pages";
+import { Navbar, Footer } from "./layout";
 
 // import CSS
 
 function App() {
     return (
-        <h1>React App will go here</h1>
+    <>
+    <Navbar />
+      <Switch>
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
+        <Route path='/Account'>
+          <Account/>
+        </Route>
+        <Route path='/Login'>
+          <Login/>
+        </Route>
+        <Route path='/Recommendations'>
+          <Recommendations/>
+        </Route>
+        <Route path='/Register'>
+          <Register/>
+        </Route>
+        <Route path='/SearchResults'>
+          <SearchResults/>
+        </Route>
+        </Switch>
+        <Footer />
+    </>
     );
 }
 
