@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Register } from "../../layout"
 
 const NavigationBar = () => {
   return (
@@ -21,7 +22,7 @@ const NavigationBar = () => {
           <Navbar.Brand href="/">Vibe</Navbar.Brand>
           <Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
             <Nav.Link href="#action1">Latest Recommendations</Nav.Link>
-            <Nav.Link href="#action1">Register</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
             <Nav.Link href="#action2">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>

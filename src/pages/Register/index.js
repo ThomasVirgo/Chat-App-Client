@@ -1,8 +1,9 @@
 import React from "react";
+import { RegistrationForm } from "../../components"
 
 function Register() {
     return (
-        <h1>Register Page</h1>
+        <RegistrationForm  />
     );
 }
 
