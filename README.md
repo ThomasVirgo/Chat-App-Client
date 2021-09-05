@@ -102,3 +102,23 @@ api-version:	v200
 geolocation:	Your location in format lat;lng, e.g. 52.47;-1.93
   
 device-datetime:	yyyy-mm-ddThh:mm:ss.sssZ (ISO 8601 format, e.g. 2018-09-14T08:30:17.360Z)
+
+************************************
+
+# INTERNATIONAL SHOWTIMES API
+
+API Endpoints examples:
+
+Get all cinemas in a particular location:
+
+'''https://api.internationalshowtimes.com/v4/cinemas/?location=<LAT, LONG>&distance=5?apikey=<API_KEY>
+
+
+Get a list of movies 2km around Leicester Square:
+
+```https://api.internationalshowtimes.com/v4/showtimes/?location=51.510865,-0.130397&distance=2
+
+
+Get details of a movie by movie ID (from previous request):
+
+```https://api.internationalshowtimes.com/v4/movies/33124
