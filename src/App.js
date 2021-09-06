@@ -14,11 +14,11 @@ function App() {
         <Route exact path="/">
           <LandingPage />
         </Route>
-        <PrivateRoute path='/account' component={Account} />
-        <PrivateRoute path='/recommendations' component={Recommendations} />
-        <LoggedOutRoute path='/login' component={Login} />
-        <LoggedOutRoute path='/register' component={Register} />
-        <LoggedOutRoute path='/search-results'component={SearchResults} />
+        <PrivateRoute path='/account' component={Account}/>
+        <PrivateRoute path='/recommendations' component={Recommendations}/>
+        <LoggedOutRoute path='/login' component={Login}/>
+        <LoggedOutRoute path='/register' component={Register}/>
+        <LoggedOutRoute path='/search-results'component={SearchResults}/>
       </Switch>
       <Footer />
     </>

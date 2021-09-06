@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -16,15 +18,21 @@ const RegistrationForm = () => {
 
 
   async function sendDetailsToServer(){
-    console.log('sending request...')
-    const payload = {
-      username,
-      password,
-      password_confirmation: confirmPassword
-    };
-    console.log(payload);
-    const {data} = await axios.post('http://localhost:8000/users/register/', payload);
-    console.log(data)
+    try {
+      const payload = {
+        username,
+        password,
+        password_confirmation: confirmPassword
+      };
+      const {data} = await axios.post('http://localhost:8000/users/register/', payload);
+      if (data.username){
+        const response = await axios.post('http://localhost:8000/users/login/', {username, password})
+        localStorage.setItem('token', response.data.token)
+        setShouldRedirect(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
   
 
@@ -47,6 +55,8 @@ const RegistrationForm = () => {
   };
 
   return (
+    <>
+    {shouldRedirect && <Redirect to='/account'/>}
     <div>
       <form>
         <label htmlFor="username-input">Please enter your username.</label>
@@ -58,6 +68,7 @@ const RegistrationForm = () => {
         <input type="submit" value="submit" onClick={handleSubmitClick} />
       </form>
     </div>
+    </>
   );
 };
 
