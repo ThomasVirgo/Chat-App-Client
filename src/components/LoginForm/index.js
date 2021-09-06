@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   async function sendDetailsToServer(){
       const payload = {username, password}
-      const { data } = axios.post('http://localhost:8000/users/login/', payload)
+      const { data } = await axios.post('http://localhost:8000/users/login/', payload)
       console.log(data)
   }
 
