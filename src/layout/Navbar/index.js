@@ -29,8 +29,8 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex" onSubmit={handleSubmit}>
-            <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" onChange={updateLocation}/>
-            <Form.Select aria-label="Default select example" onChange={updateCategory} required>
+            <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" value={location} onChange={updateLocation} required/>
+            <Form.Select aria-label="Default select example" value={category} onChange={updateCategory} required>
               <option>Category</option>
               <option value="1">Dining</option>
               <option value="2">Gigs</option>
