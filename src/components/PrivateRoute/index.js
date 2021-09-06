@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({component: Component}) => {
-    // check localstorage to see if there is a token
-    let isLoggedIn = true
+const PrivateRoute = ({path, component: Component}) => {
+    let token = localStorage.getItem('token')
+    let isLoggedIn = token ? true : false 
     return (
-        <Route render={()=>{
+        <Route path={path} render={()=>{
             return isLoggedIn ? <Component /> : <Redirect to='/login'/>
         }}/>
     )
