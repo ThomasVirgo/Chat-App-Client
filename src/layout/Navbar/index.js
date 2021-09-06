@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { Register } from "../../layout"
 
 const NavigationBar = () => {
   return (
@@ -15,15 +14,16 @@ const NavigationBar = () => {
             <Form.Select aria-label="Default select example">
               <option>Category</option>
               <option value="1">Dining</option>
-              <option value="2">Events</option>
-              <option value="3">Movies</option>
+              <option value="2">Gigs</option>
+              <option value="3">Festivals</option>
+              <option value="3">Comedies</option>
             </Form.Select>
           </Form>
           <Navbar.Brand href="/">Vibe</Navbar.Brand>
           <Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-            <Nav.Link href="#action1">Latest Recommendations</Nav.Link>
+            <Nav.Link href="/recommendations">Latest Recommendations</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
-            <Nav.Link href="#action2">Login</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
