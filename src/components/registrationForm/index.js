@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { loginUser } from '../../actions';
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const dispatch = useDispatch();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -16,25 +19,24 @@ const RegistrationForm = () => {
     setPassword(e.target.value);
   };
 
-
-  async function sendDetailsToServer(){
+  async function sendDetailsToServer() {
     try {
       const payload = {
         username,
         password,
-        password_confirmation: confirmPassword
+        password_confirmation: confirmPassword,
       };
-      const {data} = await axios.post('http://localhost:8000/users/register/', payload);
-      if (data.username){
-        const response = await axios.post('http://localhost:8000/users/login/', {username, password})
-        localStorage.setItem('token', response.data.token)
-        setShouldRedirect(true)
+      const { data } = await axios.post('http://localhost:8000/users/register/', payload);
+      if (data.username) {
+        const response = await axios.post('http://localhost:8000/users/login/', { username, password });
+        localStorage.setItem('token', response.data.token);
+        setShouldRedirect(true);
+        dispatch(loginUser());
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-  
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
@@ -56,44 +58,48 @@ const RegistrationForm = () => {
 
   return (
     <>
-    {shouldRedirect && <Redirect to='/account'/>}
-    <div className="login">
-      <div className="login__content">
-        {/* create a svg on figma with vibe in it? */}
-        <div className="login__img"></div>
-        <div className="login__forms">
+      {shouldRedirect && <Redirect to="/account" />}
+      <div className="login">
+        <div className="login__content">
+          {/* create a svg on figma with vibe in it? */}
+          <div className="login__img"></div>
+          <div className="login__forms">
+            <form className="login__create" onSubmit={handleSubmitClick}>
+              <h1 className="login__title">Create Account</h1>
 
-          <form className="login__create" onSubmit={handleSubmitClick}>
+              <div className="login__box">
+                <i className="bx bxs-user-circle login__icon"></i>
+                <input type="text" placeholder="Username" className="login__input" value={username} onChange={handleUsernameChange} />
+              </div>
 
-            <h1 className="login__title">Create Account</h1>
+              <div className="login__box">
+                <i className="bx bxs-lock login__icon"></i>
+                <input type="password" placeholder="Password" className="login__input" value={password} onChange={handlePasswordChange} />
+              </div>
 
-            <div className="login__box">
-              <i className='bx bxs-user-circle login__icon'></i>
-              <input type="text" placeholder='Username' className="login__input" value={username} onChange={handleUsernameChange}/>
-            </div>
+              <div className="login__box">
+                <i className="bx bxs-lock login__icon"></i>
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="login__input"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                />
+              </div>
 
-            <div className="login__box">
-              <i className='bx bxs-lock login__icon'></i>
-              <input type="password" placeholder='Password' className="login__input" value={password} onChange={handlePasswordChange}/>
-            </div>
+              <input type="submit" value="Sign Up" className="login__button" />
 
-            <div className="login__box">
-              <i className='bx bxs-lock login__icon'></i>
-              <input type="password" placeholder='Confirm Password' className="login__input" value={confirmPassword} onChange={handleConfirmPasswordChange}/>
-            </div>
-
-            <input type="submit" value='Sign Up' className='login__button'/>
-
-            <div>
-              <span className="login__account">Already have an Account?</span>
-              <span className="login__signin" id="sign-up">Sign In</span>
-            </div>
-
-          </form>
-
+              <div>
+                <span className="login__account">Already have an Account?</span>
+                <span className="login__signin" id="sign-up">
+                  Sign In
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
