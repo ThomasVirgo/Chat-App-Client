@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -14,8 +15,14 @@ const LoginForm = () => {
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    console.log(username, password)
+    sendDetailsToServer()
   };
+
+  async function sendDetailsToServer(){
+      const payload = {username, password}
+      const { data } = axios.post('http://localhost:8000/users/login/', payload)
+      console.log(data)
+  }
 
   return (
     <div>
