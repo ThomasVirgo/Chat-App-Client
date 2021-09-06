@@ -4,12 +4,12 @@ import { loadRestaurants } from "../../actions"
 
 const NavigationBar = () => {
 
-  const [location, setLocation] = useState("");
+  const [userLocation, setUserLocation] = useState("");
   const [category, setCategory] = useState("");
 
-  const updateLocation = (e) => {
+  const updateUserLocation = (e) => {
     const input = e.target.value;
-    setLocation(input);
+    setUserLocation(input);
   };
 
   const updateCategory = (e) => {
@@ -19,7 +19,9 @@ const NavigationBar = () => {
   
   const handleSubmit = e => {
     e.preventDefault();
-    loadRestaurants(location);
+    if (category === 'Dining') {
+      loadRestaurants(location);
+    }
   }
 
   return (
@@ -29,7 +31,7 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex" onSubmit={handleSubmit}>
-            <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" value={location} onChange={updateLocation} required/>
+            <FormControl type="search" placeholder="Enter London area" className="mr-2" aria-label="Search" value={userLocation} onChange={updateUserLocation} required/>
             <Form.Select aria-label="Default select example" value={category} onChange={updateCategory} required>
               <option>Category</option>
               <option value="1">Dining</option>
