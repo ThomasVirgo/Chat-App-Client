@@ -1,10 +1,10 @@
 import React from "react";
 import { LoginForm } from '../../components'
+import './style.css'
 
 function Login() {
     return (
         <>
-        <h1>Login Page</h1>
         <LoginForm />
         </>
     );

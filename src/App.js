@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Account, LandingPage, Login, Recommendations, Register, SearchResults } from './pages';
 import { NavigationBar, Footer } from './layout';
 import { LoggedOutRoute, PrivateRoute } from './components';
+import './style.css'
 
 // import CSS
 
