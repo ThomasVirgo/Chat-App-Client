@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
@@ -13,9 +14,19 @@ const RegistrationForm = () => {
     setPassword(e.target.value);
   };
 
-  const sendDetailsToServer = () => {
-    console.log(username, password, confirmPassword);
-  };
+
+  async function sendDetailsToServer(){
+    console.log('sending request...')
+    const payload = {
+      username,
+      password,
+      password_confirmation: confirmPassword
+    };
+    console.log(payload);
+    const {data} = await axios.post('http://localhost:8000/users/register/', payload);
+    console.log(data)
+  }
+  
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
