@@ -10,14 +10,14 @@ const NavigationBar = () => {
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex">
             <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
-            <Button variant="outline-success">Search</Button>
-            <Form.Select aria-label="Default select example">
+            <Form.Select aria-label="Default select example" required>
               <option>Category</option>
               <option value="1">Dining</option>
               <option value="2">Gigs</option>
               <option value="3">Festivals</option>
               <option value="3">Comedies</option>
             </Form.Select>
+            <Button variant="outline-success">Search</Button>
           </Form>
           <Navbar.Brand href="/">Vibe</Navbar.Brand>
           <Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
