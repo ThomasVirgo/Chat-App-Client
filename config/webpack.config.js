@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_DIRECTORY = path.join(__dirname, '../'); // the root of your project
@@ -27,10 +27,7 @@ const config = {
     new HtmlWebpackPlugin({
       // used to add the JavaScript code to the HTML
       template: path.join(PUBLIC_DIRECTORY, 'index.html'),
-      favicon: "src/favicon.svg",
-    }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
+      favicon: 'src/favicon.svg',
     }),
   ],
   module: {
