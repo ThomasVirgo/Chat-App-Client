@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions';
@@ -7,6 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const dispatch = useDispatch();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -28,56 +30,57 @@ const LoginForm = () => {
     if (data.token) {
       localStorage.setItem('token', data.token);
       setShouldRedirect(true);
+      dispatch(loginUser());
     }
   }
 
   return (
     <>
+      {/* // {shouldRedirect && <Redirect to="/account" />}
+      //{' '}
+      <div>
+        //{' '}
+        <form>
+          // <label htmlFor="username-input">Please enter your username.</label>
+          // <input type="textfield" id="username-input" value={username} onChange={handleUsernameChange}></input>
+          // <label htmlFor="password-input">Please enter your password.</label>
+          // <input type="password" id="password-input" value={password} onChange={handlePasswordChange}></input>
+          // <input type="submit" value="submit" onClick={handleSubmitClick} />
+          //{' '}
+        </form>
+        //{' '} */}
+      {/* </div> */}
+      {shouldRedirect && <Redirect to="/account" />}
+      <div className="login">
+        <div className="login__content">
+          {/* create a svg on figma with vibe in it? */}
+          <div className="login__img"></div>
+          <div className="login__forms">
+            <form className="login__register" onSubmit={handleSubmitClick}>
+              <h1 className="login__title">Sign In</h1>
 
-//       {shouldRedirect && <Redirect to="/account" />}
-//       <div>
-//         <form>
-//           <label htmlFor="username-input">Please enter your username.</label>
-//           <input type="textfield" id="username-input" value={username} onChange={handleUsernameChange}></input>
-//           <label htmlFor="password-input">Please enter your password.</label>
-//           <input type="password" id="password-input" value={password} onChange={handlePasswordChange}></input>
-//           <input type="submit" value="submit" onClick={handleSubmitClick} />
-//         </form>
-//       </div>
+              <div className="login__box">
+                <i className="bx bxs-user-circle login__icon"></i>
+                <input type="text" placeholder="Username" className="login__input" value={username} onChange={handleUsernameChange} />
+              </div>
 
-    {shouldRedirect && <Redirect to='/account'/>}
-    <div className="login">
-      <div className="login__content">
-        {/* create a svg on figma with vibe in it? */}
-        <div className="login__img"></div>
-        <div className="login__forms">
+              <div className="login__box">
+                <i className="bx bxs-lock login__icon"></i>
+                <input type="password" placeholder="Password" className="login__input" value={password} onChange={handlePasswordChange} />
+              </div>
 
-          <form className="login__register" onSubmit={handleSubmitClick}>
+              <input type="submit" value="Sign In" className="login__button" />
 
-            <h1 className="login__title">Sign In</h1>
-
-            <div className="login__box">
-              <i className='bx bxs-user-circle login__icon'></i>
-              <input type="text" placeholder='Username' className="login__input" value={username} onChange={handleUsernameChange}/>
-            </div>
-
-            <div className="login__box">
-              <i className='bx bxs-lock login__icon'></i>
-              <input type="password" placeholder='Password' className="login__input" value={password} onChange={handlePasswordChange}/>
-            </div>
-
-            <input type="submit" value='Sign In' className='login__button'/>
-
-            <div>
-              <span className="login__account">Don't have an Account?</span>
-              <span className="login__signin" id="sign-up">Sign Up</span>
-            </div>
-
-          </form>
-
+              <div>
+                <span className="login__account">Don't have an Account?</span>
+                <span className="login__signin" id="sign-up">
+                  Sign Up
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
