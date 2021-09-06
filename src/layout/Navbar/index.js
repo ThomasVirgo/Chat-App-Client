@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { loadRestaurants } from "../../actions"
 
 const NavigationBar = () => {
+
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+
+  const updateLocation = (e) => {
+    const input = e.target.value;
+    setLocation(input);
+  };
+
+  const updateCategory = (e) => {
+    const input = e.target.value;
+    setCategory(input);
+  };
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    loadRestaurants(location);
+  }
+
   return (
     <div className="navbar">
       {/* Add form validation */}
       <Navbar bg="light" expand="lg">
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Form className="d-flex">
-            <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
-            <Form.Select aria-label="Default select example" required>
+          <Form className="d-flex" onSubmit={handleSubmit}>
+            <FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" onChange={updateLocation}/>
+            <Form.Select aria-label="Default select example" onChange={updateCategory} required>
               <option>Category</option>
               <option value="1">Dining</option>
               <option value="2">Gigs</option>
