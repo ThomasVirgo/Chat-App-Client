@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,10 +23,16 @@ const LoginForm = () => {
   async function sendDetailsToServer(){
       const payload = {username, password}
       const { data } = await axios.post('http://localhost:8000/users/login/', payload)
-      console.log(data)
+      console.log(data.token)
+      if (data.token){
+        localStorage.setItem('token', data.token)
+        setShouldRedirect(true)
+      }
   }
 
   return (
+    <>
+    {shouldRedirect && <Redirect to='/account'/>}
     <div>
       <form>
         <label htmlFor="username-input">Please enter your username.</label>
@@ -34,6 +42,7 @@ const LoginForm = () => {
         <input type="submit" value="submit" onClick={handleSubmitClick} />
       </form>
     </div>
+    </>
   );
 };
 
