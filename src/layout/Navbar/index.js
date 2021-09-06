@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
@@ -6,16 +7,17 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 const NavigationBar = () => {
   const [userLocation, setUserLocation] = useState('');
   const [category, setCategory] = useState('');
-  // const [loggedIn, setLoggedIn] = useState(false);
-  const isLoggedIn = useSelector(state=> )
+  const [loggedIn, setLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    function middleman() {
-      let token = localStorage.getItem('token');
-      token ? setLoggedIn(true) : setLoggedIn(false);
-    }
-    middleman();
-  }, []);
+  // useEffect(() => {
+  //   function middleman() {
+  //     let token = localStorage.getItem('token');
+  //     token ? setLoggedIn(true) : setLoggedIn(false);
+  //   }
+  //   middleman();
+  // }, []);
 
   const updateUserLocation = (e) => {
     const input = e.target.value;
@@ -26,6 +28,11 @@ const NavigationBar = () => {
   const updateCategory = (e) => {
     const input = e.target.value;
     setCategory(input);
+  };
+
+  const handleNavbar = () => {
+    localStorage.removeItem('token');
+    dispatch(logoutUser());
   };
 
   const handleSubmit = (e) => {
@@ -74,7 +81,7 @@ const NavigationBar = () => {
           <Navbar.Brand href="/">Vibe</Navbar.Brand>
           <Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
             <Nav.Link href="/recommendations">Latest Recommendations</Nav.Link>
-            {loggedIn ? (
+            {isLoggedIn ? (
               <>
                 <Nav.Link href="/account">Account</Nav.Link>
                 <Nav.Link href="/" onClick={() => localStorage.removeItem('token')}>
