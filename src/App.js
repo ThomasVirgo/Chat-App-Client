@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Account, LandingPage, Login, Recommendations, Register, SearchResults } from './pages';
 import { NavigationBar, Footer } from './layout';
+import { LoggedOutRoute, PrivateRoute } from './components';
 
 // import CSS
 
@@ -13,21 +14,11 @@ function App() {
         <Route exact path="/">
           <LandingPage />
         </Route>
-        <Route path="/Account">
-          <Account />
-        </Route>
-        <Route path="/Login">
-          <Login />
-        </Route>
-        <Route path="/Recommendations">
-          <Recommendations />
-        </Route>
-        <Route path="/Register">
-          <Register />
-        </Route>
-        <Route path="/SearchResults">
-          <SearchResults />
-        </Route>
+        <PrivateRoute path='/account' component={Account} />
+        <PrivateRoute path='/recommendations' component={Recommendations} />
+        <LoggedOutRoute path='/login' component={Login} />
+        <LoggedOutRoute path='/register' component={Register} />
+        <LoggedOutRoute path='/search-results'component={SearchResults} />
       </Switch>
       <Footer />
     </>

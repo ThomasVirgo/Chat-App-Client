@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const LoggedOutRoute = ({component: Component}) => {
+const LoggedOutRoute = ({path, component: Component}) => {
     // check localstorage to see if there is a token
-    isLoggedIn = false
+    let isLoggedIn = false
     return (
-        <Route render={()=>{
+        <Route path={path} render={()=>{
             return !isLoggedIn ? <Component /> : <Redirect to='/account'/>
         }}/>
     )
