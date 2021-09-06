@@ -4,8 +4,7 @@ import axios from "axios";
 // load restaurants list by user's input location:
 export const loadRestaurants = async (location) => {
     try {
-        // const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants,${location},London&key=${process.env.REACT_APP_GOOGLE_API_KEY}`); 
-        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants,${location},London&key=AIzaSyBPKGIi1k-hDdWitqvRxpYmtSK7Eto2ue4`); 
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants,${location},London&key=${process.env.REACT_APP_GOOGLE_API_KEY}`); 
 
         const restaurants = response.data;
 
