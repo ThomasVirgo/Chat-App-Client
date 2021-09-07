@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser, fetchSearchResults } from '../../actions';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Route, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const NavigationBar = () => {
   const [userLocation, setUserLocation] = useState('');
@@ -9,6 +11,7 @@ const NavigationBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const updateUserLocation = (e) => {
     const input = e.target.value;
@@ -21,25 +24,21 @@ const NavigationBar = () => {
     setCategory(input);
   };
 
-  // const handleNavbar = () => {
-  //   localStorage.removeItem('token');
-  //   dispatch(logoutUser());
-  // };
+  const redirect = () => {
+    history.push('/search-results');
+    console.log('redirect attempt');
+  };
+
+  const handleNavbar = () => {
+    localStorage.removeItem('token');
+    dispatch(logoutUser());
+  };
 
   const handleSubmit = (e) => {
     console.log('Submitting');
     e.preventDefault();
-    console.log(category);
     dispatch(fetchSearchResults(userLocation, category));
-    // if (category === 'Dining') {
-    //   loadRestaurants(userLocation);
-    //   console.log('API call for restaurants');
-    // } else if (category === 'Gigs') {
-    //   console.log('API call for gigs');
-    //   const coordinates = loadGeolocation(userLocation);
-    //   loadGigs(userLocation);
-    // } else {
-    //   console.log('Not working');
+    redirect();
     setUserLocation('');
     setCategory('');
   };
@@ -86,7 +85,7 @@ const NavigationBar = () => {
             {isLoggedIn ? (
               <>
                 <Nav.Link href="/account">Account</Nav.Link>
-                <Nav.Link href="/" onClick={() => localStorage.removeItem('token')}>
+                <Nav.Link href="/" onClick={handleNavbar}>
                   Logout
                 </Nav.Link>
               </>
