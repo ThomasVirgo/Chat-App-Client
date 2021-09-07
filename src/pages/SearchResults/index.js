@@ -1,13 +1,12 @@
-import React from "react";
-import { NavigationBar } from "../../layout"
+import React, { useState } from 'react';
+import { ResultsCard } from '../../components';
 
 function SearchResults() {
-    return (
-        <>
-        <NavigationBar />
-        <h1>Search Results Page</h1>
-        </>
-    );
+  return (
+    <>
+      <h1>Search Results Page</h1>
+    </>
+  );
 }
 
 export default SearchResults;

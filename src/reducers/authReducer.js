@@ -9,7 +9,7 @@ const authReducer = (state = initState, action) => {
     case 'LOGOUT':
       return { isLoggedIn: action.payload, error: false };
     case 'SET_ERROR':
-      return { isLoggedIn: action.payload };
+      return { ...state, error: action.payload };
 
     default:
       return state;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-// import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../actions';
+import { logoutUser, fetchSearchResults } from '../../actions';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 const NavigationBar = () => {
@@ -10,14 +9,6 @@ const NavigationBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   function middleman() {
-  //     let token = localStorage.getItem('token');
-  //     token ? setLoggedIn(true) : setLoggedIn(false);
-  //   }
-  //   middleman();
-  // }, []);
 
   const updateUserLocation = (e) => {
     const input = e.target.value;
@@ -30,25 +21,27 @@ const NavigationBar = () => {
     setCategory(input);
   };
 
-  const handleNavbar = () => {
-    localStorage.removeItem('token');
-    dispatch(logoutUser());
-  };
+  // const handleNavbar = () => {
+  //   localStorage.removeItem('token');
+  //   dispatch(logoutUser());
+  // };
 
   const handleSubmit = (e) => {
     console.log('Submitting');
     e.preventDefault();
     console.log(category);
-    if (category === 'Dining') {
-      loadRestaurants(userLocation);
-      console.log('API call for restaurants');
-    } else if (category === 'Gigs') {
-      console.log('API call for gigs');
-      const coordinates = loadGeolocation(userLocation);
-      loadGigs(userLocation);
-    } else {
-      console.log('Not working');
-    }
+    dispatch(fetchSearchResults(userLocation, category));
+    // if (category === 'Dining') {
+    //   loadRestaurants(userLocation);
+    //   console.log('API call for restaurants');
+    // } else if (category === 'Gigs') {
+    //   console.log('API call for gigs');
+    //   const coordinates = loadGeolocation(userLocation);
+    //   loadGigs(userLocation);
+    // } else {
+    //   console.log('Not working');
+    setUserLocation('');
+    setCategory('');
   };
 
   return (
@@ -70,9 +63,18 @@ const NavigationBar = () => {
             <Form.Select aria-label="Default select example" value={category} onChange={updateCategory} required>
               <option>Category</option>
               <option value="Dining">Dining</option>
-              <option value="Gigs">Gigs</option>
-              <option value="Festivals">Festivals</option>
-              <option value="Comedies">Comedies</option>
+              <option value="ALL">All Events</option>
+              <option value="FEST">Festivals</option>
+              <option value="LIVE">Live Music</option>
+              <option value="CLUB">Clubbing/Dance Music</option>
+              <option value="DATE">Dating Event</option>
+              <option value="THEATRE">Theatre/ Dance</option>
+              <option value="COMEDY">Comedy</option>
+              <option value="EXHIB">Exhibitions and Attractions</option>
+              <option value="BARPUB">Bar/ Pub Events</option>
+              <option value="LGB">LGBTQ+ Events</option>
+              <option value="SPORT">Sporting Events</option>
+              <option value="ARTS">The Arts</option>
             </Form.Select>
             <Button variant="outline-success" onClick={handleSubmit}>
               Search
