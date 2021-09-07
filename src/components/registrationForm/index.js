@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions';
+import { useHistory } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const history = useHistory()
   const dispatch = useDispatch();
 
   const handleUsernameChange = (e) => {
@@ -92,7 +94,7 @@ const RegistrationForm = () => {
 
               <div>
                 <span className="login__account">Already have an Account?</span>
-                <span className="login__signin" id="sign-up">
+                <span className="login__signin" id="sign-up" onClick={()=>history.push("/login")}>
                   Sign In
                 </span>
               </div>

@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions';
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const history = useHistory();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const handleUsernameChange = (e) => {
@@ -59,7 +61,7 @@ const LoginForm = () => {
 
               <div>
                 <span className="login__account">Don't have an Account?</span>
-                <span className="login__signin" id="sign-up">
+                <span className="login__signin" id="sign-up" onClick={()=>history.push("/register")}>
                   Sign Up
                 </span>
               </div>
