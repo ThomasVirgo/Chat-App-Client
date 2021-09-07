@@ -1,11 +1,11 @@
 import React from "react";
-import { CarouselContainer } from "../../components";
+import { CarouselContainer, Slider } from "../../components";
 
 function LandingPage() {
     return (
         <>
          <h1>Landing Page</h1>
-         <CarouselContainer />
+         <Slider data={[1,2,3,4,5]} />
         </>
     );
 }
