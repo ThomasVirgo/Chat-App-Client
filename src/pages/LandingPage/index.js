@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Slider } from "../../components";
+import { Slider, SearchForm } from "../../components";
 import axios from 'axios'
+// import './style.css'
 
 function LandingPage() {
     const [sliderResults, setSliderResults] = useState([])
@@ -17,7 +18,8 @@ function LandingPage() {
 
     return (
         <>
-         <Slider data={sliderResults} />
+            <SearchForm />
+            <Slider data={sliderResults} />
         </>
     );
 }

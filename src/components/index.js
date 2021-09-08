@@ -9,3 +9,4 @@ export { default as EventRecommendationsCard } from './EventRecommendationsCard'
 export { default as EventCard } from './EventCard';
 export { default as Slider } from './Slider';
 export { default as AccountEventCard } from './AccountEventCard';
+export { default as SearchForm } from './SearchForm';

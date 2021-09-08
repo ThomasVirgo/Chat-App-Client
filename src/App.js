@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Account, LandingPage, Login, Recommendations, Register, SearchResults } from './pages';
-import { NavigationBar, Footer } from './layout';
+import { NavigationBar, Footer, Nav } from './layout';
 import { LoggedOutRoute, PrivateRoute } from './components';
 import './style.css';
 
@@ -10,7 +10,7 @@ import './style.css';
 function App() {
   return (
     <>
-      <NavigationBar />
+      <Nav/>
       <Switch>
         <Route exact path="/">
           <LandingPage />
@@ -21,7 +21,7 @@ function App() {
         <LoggedOutRoute path="/register" component={Register} />
         <LoggedOutRoute path="/search-results" component={SearchResults} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
