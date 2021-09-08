@@ -1,19 +1,70 @@
 import React from 'react';
 import axios from 'axios';
-import './style.css'
-
+import { useSelector } from 'react-redux';
+import './style.css';
 
 function RestaurantCard({ result }) {
+  //   {
+  //     "name": "The Ivy Chelsea Garden",
+  //     "address": "195, 197 King's Rd, London SW3 5EQ, United Kingdom",
+  //     "rating": 4.3,
+  //     "photo_reference": "Aap_uEBKuKs7aK7p-GXorVvGpirWdiilimJL7MLVw0jV1JMbrlsEokbtkzt-tmzyYVPu3QKn6YxXkc6Qfxt8hRgLHITB4b2SGwu0EnmxOmCoBOA7ICQKoEo1Uy4g5_HpWOCgc8vdQl8rFT_Px4cLc6NYIOZ-G-clMvigg74TnZxdqMxmcoyV",
+  //     "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1400&maxheight=1400&photo_reference=Aap_uEBKuKs7aK7p-GXorVvGpirWdiilimJL7MLVw0jV1JMbrlsEokbtkzt-tmzyYVPu3QKn6YxXkc6Qfxt8hRgLHITB4b2SGwu0EnmxOmCoBOA7ICQKoEo1Uy4g5_HpWOCgc8vdQl8rFT_Px4cLc6NYIOZ-G-clMvigg74TnZxdqMxmcoyV&key=AIzaSyBb20CVuq9MNn35mjwMImG3ln_1Zk1KO7E",
+  //     "place_id": "ChIJJ-MhPWwFdkgRKVwtA039nU0",
+  //     "total_ratings": 3038,
+  //     "category": "restaurant"
+  // }
 
-  async function goToWebsite(){
-    const {data} = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`)
-    console.log(data)
-    if (data != 'Not Available'){
+  const enteredUsername = useSelector((state) => state.authReducer.username);
+  console.log(enteredUsername);
+
+  async function goToWebsite() {
+    const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
+    console.log(data);
+    if (data != 'Not Available') {
       window.open(data, '_blank');
     } else {
-      alert('This restaurant has no website, sorry!')
+      alert('This restaurant has no website, sorry!');
     }
   }
+
+  // const response = await fetch('http://localhost:3000/books', options);
+  // const { id, err } = await response.json();
+
+  async function savetoDb() {
+    let obj = {
+      place_id: result.place_id,
+      name: result.name,
+      photo_url: result.photo_url,
+      address: result.address,
+      rating: result.rating,
+      total_ratings: result.total_ratings,
+      username: enteredUsername,
+      category: result.category,
+    };
+
+    console.log(obj)
+
+    let object = {
+      place_id: "laf23",
+      name: "thisplace",
+      photo_url: "www.urlforthisplace.com",
+      address: "Brick Lane",
+      rating: 3.4,
+      total_ratings: 256,
+      username: 'theboss',
+    };
+
+    let token = localStorage.getItem('token');
+    if (token) {
+      const { data } = await axios.post(`http://localhost:8000/places/restaurants/`, object,  {headers: {"Authorization": `Token ${token}` }},);
+      console.log(data);
+    } else {
+      console.log("This is where you'll disable the button");
+    }
+  }
+  // console.log(savetoDb());
+
 
   return (
     <div id="restautantCard">

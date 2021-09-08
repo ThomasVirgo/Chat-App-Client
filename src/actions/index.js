@@ -1,22 +1,19 @@
 import axios from 'axios';
 
-export const loginUser = () => {
-  return async (dispatch) => {
-    dispatch({
+export const loginUser = (enteredUsername) => {
+  // console.log(enteredUsername) fine here too - accessed username
+  return {
       type: 'LOGIN',
-      payload: true,
-    });
+      payload: { isLoggedIn: true, username: enteredUsername },
+    };
   };
-};
 
 export const logoutUser = () => {
-  return async (dispatch) => {
-    dispatch({
+  return {
       type: 'LOGOUT',
-      payload: false,
-    });
+      payload: { isLoggedIn: false, username: '' },
+    };
   };
-};
 
 // export const searchParams = (loc, cat) => {
 //   return async (dispatch) => {

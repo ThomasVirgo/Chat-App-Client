@@ -33,7 +33,8 @@ const LoginForm = () => {
     if (data.token) {
       localStorage.setItem('token', data.token);
       setShouldRedirect(true);
-      dispatch(loginUser());
+      dispatch(loginUser(username));
+      // console.log(username) accessed fine here
     }
   }
 
