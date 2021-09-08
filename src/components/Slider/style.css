@@ -1,3 +1,17 @@
 .slider-card{
     display: flex;
+    border: 1px solid red;
+    /* margin-right: 100px; */
+    margin: auto;
+    /* text-align: center; */
+}
+
+.slider-card>button {
+    background-color: transparent;
+    outline: none;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    margin: auto;
 }
