@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions';
 import { useHistory } from 'react-router-dom';
+import './style.css'
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
@@ -90,13 +91,18 @@ const RegistrationForm = () => {
                 />
               </div>
 
+              <div className="password__warning">
+                <p>Your password can’t be too similar to your other personal information. It must contain at least 8 characters.</p>
+                <p>Your password can’t be a commonly used password. It can’t be entirely numeric.</p>
+              </div>
+
               <input type="submit" value="Sign Up" className="login__button" />
 
               <div>
                 <span className="login__account">Already have an Account?</span>
-                <span className="login__signin" id="sign-up" onClick={()=>history.push("/login")}>
-                  Sign In
-                </span>
+                <p className="login__signin" id="sign-up" onClick={()=>history.push("/login")}>
+                Login
+                </p>
               </div>
             </form>
           </div>
