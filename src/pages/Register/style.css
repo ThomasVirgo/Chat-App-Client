@@ -47,6 +47,7 @@ img{
     border-radius: 1rem;
     text-align: center;
     box-shadow: 0 8px 20px var(--text-color-light);
+    margin-top: 50px;
 }
 
 .login__title{
