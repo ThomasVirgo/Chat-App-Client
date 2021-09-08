@@ -47,17 +47,10 @@ function RestaurantCard({ result }) {
         <p>Google rating: {result.rating}</p>
         <p>Total ratings: {result.total_ratings}</p>
       </div>
-      <div id="imgAndReviews">
-        <div id="leftColumn">
-          <img src={result.photo_url} alt="image not available" />
-          <button onClick={goToWebsite}>Go to website</button>
-        </div>
-        <div id="rightColumn">
-          <div id="reviewsDiv">Reviews</div>
-          {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
-          <button>Add review</button> {/* Here will add an onClick that makes the post and can add redirect*/}
-        </div>
-      </div>
+      <img src={result.photo_url} alt="image not available" />
+      <button onClick={goToWebsite}>WEBSITE</button>
+      {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
+      <button>ADD REVIEW</button>
     </div>
   );
 }

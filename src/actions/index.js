@@ -31,7 +31,7 @@ export const fetchSearchResults = (location, cat) => {
         const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/${location}/`);
         // if (data) => raise error if not
         let resultsArray = data;
-        console.log(data);
+        // console.log(data);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
@@ -39,7 +39,7 @@ export const fetchSearchResults = (location, cat) => {
       } else if (cat === 'ALL') {
         const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london`);
         let resultsArray = data;
-        console.log(data);
+        // console.log(data);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
@@ -47,7 +47,7 @@ export const fetchSearchResults = (location, cat) => {
       } else {
         const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london/${cat}`);
         let resultsArray = data;
-        console.log(data);
+        // console.log(data);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
@@ -60,6 +60,29 @@ export const fetchSearchResults = (location, cat) => {
       });
     }
   };
+};
+
+
+// Helper scrubber function
+export const scrubStr = (str) => {
+  const cleanStr = str
+    .replaceAll("&quot;", '"')
+    .replaceAll("&pound;", '')
+    .replaceAll("£", '')
+    .replaceAll("gbp", '')
+    .replaceAll("GBP", '')
+    .replaceAll("&#8220;", '"')
+    .replaceAll("&#8221;", '"')
+    .replaceAll("&#8217;", '"')
+    .replaceAll("&#039;", "'")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&eacute;", "e")
+    .replaceAll("&amp;", " & ")
+    .replaceAll("&ldquo;", '"')
+    .replaceAll("&rsquo;", "'")
+    .replaceAll("&rdquo;", '"')
+    .replaceAll("&hellip;", " ... ");
+  return cleanStr;
 };
 
 // Create a fetchfunc that takes in the two values in global state (loc and cat)

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './style.css'
+import { AccountEventCard, RestaurantCard } from '..'
 
 const Slider = ({data}) => {
     const [index, setIndex] = useState(0)
@@ -15,9 +16,10 @@ const Slider = ({data}) => {
     }
 
     return (
+        data.length && 
         <div className='slider-card'>
             <button onClick={slideLeft}>{"<"}</button>
-            <div>Content Here... {data[index]}</div>
+            <div>{data[index].category == 'restuarant' ? <RestaurantCard result= {data[index]}/> : <AccountEventCard result= {data[index]}/>}</div>
             <button onClick={slideRight}>{">"}</button>
         </div>
     )

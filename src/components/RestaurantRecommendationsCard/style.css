@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@media screen and (min-width: 768px){
+    :root{
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+
+    }
+}
+
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+#recommendationsCard {
+    border: 2px rgb(111, 128, 20) solid;
+    margin: 2rem auto;
+    text-align: center;
+    width: 50%;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+#imgAndReviews {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+}
+
+#reviewsDiv {
+    height: 60%;
+    background-color: rgb(202, 201, 201);
+    border-radius: 10px;
+    border: 2px gray solid;
+}
+
+img {
+    border-radius: 10px;
+}
+
+#recommendationsCard button {
+    margin: 1rem;
+    padding: 0.3rem;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(202, 201, 201);
+}
