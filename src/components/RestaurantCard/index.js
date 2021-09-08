@@ -40,7 +40,7 @@ function RestaurantCard({ result }) {
   }
   console.log(enteredUsername)
 
-
+  let tokenStr = localStorage.getItem('token');
   return (
     <div className="eventWrapper">
       <h1>{result.name}</h1>
@@ -51,7 +51,7 @@ function RestaurantCard({ result }) {
       </h3>
       </div>
       <button onClick={goToWebsite}>WEBSITE</button>
-      {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
+      {tokenStr && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
       <button>ADD REVIEW</button>
     </div>
   );
