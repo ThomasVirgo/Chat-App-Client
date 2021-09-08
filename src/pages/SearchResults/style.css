@@ -47,7 +47,7 @@
 
 .details {
   width: 95%;
-  height: 60%;
+  height: 50%;
   overflow-y: hidden;
   margin: 0 auto 2em;
   padding-top: 10.5em;
@@ -79,15 +79,12 @@
   font-style: italic;
 }
 
-.details>:last-child {
-  padding-bottom: 2em;
-}
 
 .image{
   position: relative;
   z-index: 2;
   width: 85%;
-  height: 370px;
+  height: 350px;
   margin: 0 auto -10em;
   background-size: cover;
   background-position: center;
