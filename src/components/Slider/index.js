@@ -19,7 +19,7 @@ const Slider = ({data}) => {
         data.length && 
         <div className='slider-card'>
             <button onClick={slideLeft}>{"<"}</button>
-            <div>{data[index].category == 'restuarant' ? <RestaurantCard result= {data[index]}/> : <AccountEventCard result= {data[index]}/>}</div>
+            <div>{data[index].category == 'restaurant' ? <RestaurantCard result= {data[index]}/> : <AccountEventCard result= {data[index]}/>}</div>
             <button onClick={slideRight}>{">"}</button>
         </div>
     )
