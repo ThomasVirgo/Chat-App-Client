@@ -4,17 +4,6 @@ import { useSelector } from 'react-redux';
 import './style.css';
 
 function RestaurantCard({ result }) {
-  //   {
-  //     "name": "The Ivy Chelsea Garden",
-  //     "address": "195, 197 King's Rd, London SW3 5EQ, United Kingdom",
-  //     "rating": 4.3,
-  //     "photo_reference": "Aap_uEBKuKs7aK7p-GXorVvGpirWdiilimJL7MLVw0jV1JMbrlsEokbtkzt-tmzyYVPu3QKn6YxXkc6Qfxt8hRgLHITB4b2SGwu0EnmxOmCoBOA7ICQKoEo1Uy4g5_HpWOCgc8vdQl8rFT_Px4cLc6NYIOZ-G-clMvigg74TnZxdqMxmcoyV",
-  //     "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1400&maxheight=1400&photo_reference=Aap_uEBKuKs7aK7p-GXorVvGpirWdiilimJL7MLVw0jV1JMbrlsEokbtkzt-tmzyYVPu3QKn6YxXkc6Qfxt8hRgLHITB4b2SGwu0EnmxOmCoBOA7ICQKoEo1Uy4g5_HpWOCgc8vdQl8rFT_Px4cLc6NYIOZ-G-clMvigg74TnZxdqMxmcoyV&key=AIzaSyBb20CVuq9MNn35mjwMImG3ln_1Zk1KO7E",
-  //     "place_id": "ChIJJ-MhPWwFdkgRKVwtA039nU0",
-  //     "total_ratings": 3038,
-  //     "category": "restaurant"
-  // }
-
   const enteredUsername = useSelector((state) => state.authReducer.username);
   console.log(enteredUsername);
 
@@ -28,8 +17,6 @@ function RestaurantCard({ result }) {
     }
   }
 
-  // const response = await fetch('http://localhost:3000/books', options);
-  // const { id, err } = await response.json();
 
   async function savetoDb() {
     let obj = {
@@ -43,27 +30,13 @@ function RestaurantCard({ result }) {
       category: result.category,
     };
 
-    console.log(obj)
-
-    let object = {
-      place_id: "laf23",
-      name: "thisplace",
-      photo_url: "www.urlforthisplace.com",
-      address: "Brick Lane",
-      rating: 3.4,
-      total_ratings: 256,
-      username: 'theboss',
-    };
-
     let token = localStorage.getItem('token');
     if (token) {
-      const { data } = await axios.post(`http://localhost:8000/places/restaurants/`, object,  {headers: {"Authorization": `Token ${token}` }},);
-      console.log(data);
-    } else {
-      console.log("This is where you'll disable the button");
+      const { data } = await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+      console.log(data)
     }
   }
-  // console.log(savetoDb());
+  console.log(enteredUsername)
 
 
   return (
@@ -81,7 +54,7 @@ function RestaurantCard({ result }) {
         </div>
         <div id="rightColumn">
           <div id="reviewsDiv">Reviews</div>
-          <button onClick={savetoDb}>Save</button>
+          {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
           <button>Add review</button> {/* Here will add an onClick that makes the post and can add redirect*/}
         </div>
       </div>
