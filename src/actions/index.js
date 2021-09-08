@@ -67,6 +67,12 @@ export const fetchSearchResults = (location, cat) => {
 export const scrubStr = (str) => {
   const cleanStr = str
     .replaceAll("&quot;", '"')
+    .replaceAll("&pound;", '')
+    .replaceAll("£", '')
+    .replaceAll("gbp", '')
+    .replaceAll("GBP", '')
+    .replaceAll("&#8220;", '"')
+    .replaceAll("&#8221;", '"')
     .replaceAll("&#039;", "'")
     .replaceAll("&#39;", "'")
     .replaceAll("&eacute;", "e")
