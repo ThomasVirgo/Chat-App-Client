@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
