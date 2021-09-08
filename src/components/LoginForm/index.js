@@ -32,7 +32,8 @@ const LoginForm = () => {
     if (data.token) {
       localStorage.setItem('token', data.token);
       setShouldRedirect(true);
-      dispatch(loginUser());
+      dispatch(loginUser(username));
+      // console.log(username) accessed fine here
     }
   }
 
@@ -61,7 +62,7 @@ const LoginForm = () => {
 
               <div>
                 <span className="login__account">Don't have an Account?</span>
-                <span className="login__signin" id="sign-up" onClick={()=>history.push("/register")}>
+                <span className="login__signin" id="sign-up" onClick={() => history.push('/register')}>
                   Sign Up
                 </span>
               </div>
