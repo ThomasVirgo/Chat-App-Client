@@ -1,7 +1,6 @@
 import React from 'react';
 
 function EventCard({ result }) {
-  
   console.log(result);
 
   return (
@@ -22,6 +21,7 @@ function EventCard({ result }) {
       </p>
       <p>Entry Fee: {result.entryprice}</p>
       <button onClick={() => window.open(result.link, '_blank')}>Buy Tickets</button>
+      <button>Save</button>
     </div>
   );
 }

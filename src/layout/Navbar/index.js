@@ -5,6 +5,8 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Route, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
+// MAY HAVE A PROBLEM WITH IS LOGGED IN AS ACTION HAS CHANGED
+
 const NavigationBar = () => {
   const [userLocation, setUserLocation] = useState('');
   const [category, setCategory] = useState('');

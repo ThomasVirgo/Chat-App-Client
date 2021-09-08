@@ -8,3 +8,4 @@ export { default as RestaurantRecommendationsCard } from './RestaurantRecommenda
 export { default as EventRecommendationsCard } from './EventRecommendationsCard';
 export { default as EventCard } from './EventCard';
 export { default as Slider } from './Slider';
+export { default as AccountEventCard } from './AccountEventCard';
