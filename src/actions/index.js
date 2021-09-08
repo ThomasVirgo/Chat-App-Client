@@ -71,6 +71,7 @@ export const scrubStr = (str) => {
     .replaceAll("gbp", '£')
     .replaceAll("GBP", '£')
     .replaceAll("&#8220;", '"')
+    .replaceAll("&#8211;", '-')
     .replaceAll("&#8221;", '"')
     .replaceAll("&#8217;", '"')
     .replaceAll("&#039;", "'")
