@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions';
 import { useHistory } from 'react-router-dom';
+import './style.css'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -45,7 +46,7 @@ const LoginForm = () => {
           <div className="login__img"></div>
           <div className="login__forms">
             <form className="login__register" onSubmit={handleSubmitClick}>
-              <h1 className="login__title">Sign In</h1>
+              <h1 className="login__title">Login</h1>
 
               <div className="login__box">
                 <i className="bx bxs-user-circle login__icon"></i>
@@ -61,9 +62,9 @@ const LoginForm = () => {
 
               <div>
                 <span className="login__account">Don't have an Account?</span>
-                <span className="login__signin" id="sign-up" onClick={()=>history.push("/register")}>
-                  Sign Up
-                </span>
+                <p className="login__signin" id="sign-up" onClick={()=>history.push("/register")}>
+                  Register
+                </p>
               </div>
             </form>
           </div>
