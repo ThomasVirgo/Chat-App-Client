@@ -1,8 +1,9 @@
 import React from 'react';
-import './style.css';
 import { scrubStr } from "../../actions";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 function EventCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
@@ -32,26 +33,28 @@ function EventCard({ result }) {
       console.log(data)
     }
   }
+  let tokenStr = localStorage.getItem('token');
+  
   console.log(enteredUsername)
 
+  const background = result.largeimageurl;
+
+  
+
   return (
-    <div className="cards_item">
-      <div className="card">
-        <div className="card_image"><img src={result.largeimageurl} alt="Event Image" /></div>
-        <div className="card_content">
-          <h2 className="card_title">{scrubStr(result.eventname)}</h2>
-          <div className="card_text">
-            <p className="card-dates">Dates: {result.startdate.slice(0, 10)} - {result.enddate.slice(0, 10)}</p>
-            <p>{scrubStr(result.description)}</p>
-            <p>Address: {scrubStr(result.venue.address)} {result.venue.town} {result.venue.postcode}</p>
-            <p>Open from: {result.openingtimes.doorsopen}<br />Last Entry: {result.openingtimes.lastentry}</p>
-            <p>Entry Fee: £{scrubStr(result.entryprice)}</p>
-          </div>
-          <button onClick={() => window.open(result.link, '_blank')}>Buy Tickets</button>
-          {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too: if (enteredUsername !== '' && isSaved) etc*/}
-        </div>
+    <div className="eventWrapper">
+        <h1>{scrubStr(result.eventname)}</h1>
+      <div className="image" style={{ backgroundImage: `url(${background})` }}></div>
+      <div className="details"><h3>{scrubStr(result.description)}</h3>
+
+            {/* <div className="card-dates"><FontAwesomeIcon icon={faCalendarAlt}/>{result.startdate.slice(0, 10)} - {result.enddate.slice(0, 10)}</div> */}
+        <p>Address:<br/>{scrubStr(result.venue.address)} {result.venue.town} {result.venue.postcode}</p>
+        <p>Open from: {result.openingtimes.doorsopen}{result.openingtimes.lastentry ? ` Last Entry: ${result.openingtimes.lastentry}` : ''}</p>
+          <p>Entry Fee: {scrubStr(result.entryprice)}</p>
       </div>
-    </div>
+          <button onClick={() => window.open(result.link, '_blank')}>Buy Tickets</button>
+          {tokenStr && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too: if (enteredUsername !== '' && isSaved) etc*/}
+      </div>
   );
 }
 
