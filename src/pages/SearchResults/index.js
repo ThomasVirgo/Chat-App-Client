@@ -1,6 +1,7 @@
 import React from 'react';
 import { RestaurantCard, EventCard } from '../../components';
 import { useSelector } from 'react-redux';
+import './style.css'
 
 const SearchResults = () => {
   const resultsArray = useSelector((state) => state.searchReducer.searchResultsArray);
