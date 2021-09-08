@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Slider, SearchForm } from "../../components";
+import goodvibes from '../../img/goodvibes.gif'
 import axios from 'axios'
 // import './style.css'
 
@@ -19,7 +20,11 @@ function LandingPage() {
     return (
         <>
             <SearchForm />
-            <Slider data={sliderResults} />
+            <div>
+                <img src={goodvibes} alt='vibes-logo'/>
+                <h3>You catching our vibe? When two good vibes people come together but can't find a place with the same good vibes, well, what good does that do anyone? So, we decided to have your back. Find the coolest gigs and coziest restaurants here, save them to your account and tick them off once you've visited them. Don't forget to let us know the answer to our only question: were they truly good vibes?</h3>
+                <Slider data={sliderResults} />
+            </div>
         </>
     );
 }
