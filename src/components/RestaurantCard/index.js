@@ -42,14 +42,14 @@ function RestaurantCard({ result }) {
 
 
   return (
-    <div id="restautantCard">
-      <div id="header">
-        <h1>{result.name}</h1>
-        <p>{result.address}</p>
-        <p>Google rating: {result.rating}</p>
-        <p>Total ratings: {result.total_ratings}</p>
+    <div className="eventWrapper">
+      <h1>{result.name}</h1>
+      <div className="image" style={{ backgroundImage: `url(${result.photo_url})` }}></div>
+      <div className="details">
+        <h3>Google rating: {result.rating}
+          <p>Total ratings: {result.total_ratings}</p>
+      </h3>
       </div>
-      <img src={result.photo_url} alt="image not available" />
       <button onClick={goToWebsite}>WEBSITE</button>
       {enteredUsername && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
       <button>ADD REVIEW</button>
