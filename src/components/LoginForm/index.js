@@ -32,15 +32,15 @@ const LoginForm = () => {
     console.log(data.token);
     if (data.token) {
       localStorage.setItem('token', data.token);
+      localStorage.setItem('username', username)
       setShouldRedirect(true);
       dispatch(loginUser(username));
-      // console.log(username) accessed fine here
     }
   }
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/account" />}
+      {shouldRedirect && <Redirect to="/" />}
       <div className="login">
         <div className="login__content">
           {/* create a svg on figma with vibe in it? */}
