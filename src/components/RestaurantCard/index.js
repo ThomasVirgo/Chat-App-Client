@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './style.css';
@@ -7,7 +7,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  console.log(enteredUsername);
+  const [buttonText, setButtonText] = useState("Save")
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -21,6 +21,7 @@ function RestaurantCard({ result }) {
 
 
   async function savetoDb() {
+    
     let obj = {
       place_id: result.place_id,
       name: result.name,
@@ -31,11 +32,21 @@ function RestaurantCard({ result }) {
       username: enteredUsername,
       category: result.category,
     };
+    console.log(obj);
 
     let token = localStorage.getItem('token');
+    console.log(token);
+    
     if (token) {
-      const { data } = await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
-      console.log(data)
+      await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `token ${token}` }},);
+      // console.log(data)
+      setButtonText('Saved');
+      console.log(buttonText);
+      setTimeout(() => {
+        setButtonText('Save');
+        console.log(buttonText);
+      }, 2000)
+
     }
   }
   console.log(enteredUsername)
@@ -51,7 +62,7 @@ function RestaurantCard({ result }) {
       </h3>
       </div>
       <button onClick={goToWebsite}>WEBSITE</button>
-      {tokenStr && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too*/}
+      {tokenStr && <button onClick={savetoDb}>{buttonText}</button>} {/*interim solution - need to toggle and unsave, too*/}
       <button>ADD REVIEW</button>
     </div>
   );
