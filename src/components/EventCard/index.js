@@ -57,6 +57,7 @@ function EventCard({ result }) {
 
       <div className="card-dates"><FontAwesomeIcon icon={faCalendarAlt}/> {result.startdate.slice(0, 10)} - {result.enddate.slice(0, 10)}</div>
         <p>{scrubStr(result.venue.address)} {result.venue.town} {result.venue.postcode}</p>
+
         <p>Open from: {result.openingtimes.doorsopen}{result.openingtimes.lastentry ? ` Last Entry: ${result.openingtimes.lastentry}` : ''}</p>
           <p>Entry Fee: {scrubStr(result.entryprice)}</p>
       </div>
