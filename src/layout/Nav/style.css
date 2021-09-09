@@ -1,4 +1,6 @@
-
+ul {
+    background-color: white;
+}
 .wrapper{
     position: fixed;
     top: 0;

@@ -5,12 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { ReviewModal } from '..'
 
+//if we are on account page, isViewed needs to be what works, if we are on search-results, needs to be savetoDb func - make a func that combines the two
+
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  
+  const [isViewable, setIsViewable] = useState(true);
   const [buttonText, setButtonText] = useState("SAVE")
   const [isModalActive, setIsModalActive] = useState(false);
   let username= localStorage.getItem('username');
+
+  const pathname = window.location.pathname
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -19,6 +23,30 @@ function RestaurantCard({ result }) {
       window.open(data, '_blank');
     } else {
       alert('This restaurant has no website, sorry!');
+    }
+  }
+
+  async function isViewed(){
+    try {
+      let token = localStorage.getItem('token');
+      let obj = {...result, is_viewable: false} //check isviewable same name
+      console.log(obj)
+      if (token) {
+        const { data } = await axios.put(`http://localhost:8000/places/events/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+        console.log(data)
+        setIsViewable(false)
+        setButtonText('UNSAVED');
+    } }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  function functionChooser(){
+    if (pathname.includes('account')){
+      isViewed()
+    } else {
+      savetoDb()
     }
   }
 
@@ -54,6 +82,7 @@ function RestaurantCard({ result }) {
   let tokenStr = localStorage.getItem('token');
   return (
     <>
+    {isViewable ?
     <div className="eventWrapper">
       <h1>{result.name}</h1>
       <div className="image" style={{ backgroundImage: `url(${result.photo_url})` }}></div>
@@ -63,9 +92,9 @@ function RestaurantCard({ result }) {
       </h3>
       </div>
       <button onClick={goToWebsite}>WEBSITE</button>
-      {tokenStr && <button onClick={savetoDb}>{buttonText}</button>} {/*interim solution - need to toggle and unsave, too*/}
+      {tokenStr && <button onClick={functionChooser}>{buttonText}</button>} {/*interim solution - need to toggle and unsave, too*/}
       <button onClick={toggleModal}>ADD REVIEW</button>
-    </div>
+    </div>: ''}
     {isModalActive && <ReviewModal result={result} toggleModal={toggleModal}/>}
     </>
   );
