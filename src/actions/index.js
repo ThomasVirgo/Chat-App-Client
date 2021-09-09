@@ -66,22 +66,24 @@ export const fetchSearchResults = (location, cat) => {
 // Helper scrubber function
 export const scrubStr = (str) => {
   const cleanStr = str
-    .replaceAll("&quot;", '"')
+    .replaceAll("&quot;", "'")
     .replaceAll("&pound;", '£')
     .replaceAll("gbp", '£')
     .replaceAll("GBP", '£')
-    .replaceAll("&#8220;", '"')
+    .replaceAll("&#8220;", "'")
     .replaceAll("&#8211;", '-')
-    .replaceAll("&#8221;", '"')
-    .replaceAll("&#8217;", '"')
+    .replaceAll("&#8221;", "'")
+    .replaceAll("&#8216;", "'")
+    .replaceAll("&#8217;", "'")
     .replaceAll("&#039;", "'")
     .replaceAll("&#39;", "'")
     .replaceAll("&eacute;", "e")
     .replaceAll("&amp;", " & ")
-    .replaceAll("&ldquo;", '"')
+    .replaceAll("&ldquo;", "'")
     .replaceAll("&rsquo;", "'")
-    .replaceAll("&rdquo;", '"')
-    .replaceAll("&hellip;", " ... ");
+    .replaceAll("&rdquo;", "'")
+    .replaceAll("&hellip;", " ... ")
+    .replaceAll("&#128266", "");
   return cleanStr;
 };
 
