@@ -15,14 +15,6 @@ export const logoutUser = () => {
     };
   };
 
-// export const searchParams = (loc, cat) => {
-//   return async (dispatch) => {
-//     dispatch({
-//       type: 'SEARCH',
-//       payload: { location: loc, category: cat },
-//     });
-//   };
-// };
 
 export const fetchSearchResults = (location, cat) => {
   return async (dispatch) => {
@@ -39,7 +31,7 @@ export const fetchSearchResults = (location, cat) => {
       } else if (cat === 'ALL') {
         const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london`);
         let resultsArray = data;
-        // console.log(data);
+        console.log(data);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
@@ -86,6 +78,54 @@ export const scrubStr = (str) => {
     .replaceAll("&#128266", "");
   return cleanStr;
 };
+
+
+// const dummyData = [{
+//   "eventname": "South Kensington Comedy Club",
+//   "venue": {
+//       "id": 71553,
+//   },
+//   "startdate": "2021-09-17T20:00:00+00:00",
+//   "enddate": "2021-09-17T22:00:00+00:00",
+// },
+// {
+//   "eventname": "South Kensington Comedy Club",
+//   "venue": {
+//       "id": 71553,
+//   },
+//   "startdate": "2021-09-18T19:00:00+00:00",
+//   "enddate": "2021-09-18T21:00:00+00:00",
+// },
+// {
+//   "eventname": "South Kensington Comedy Club",
+//   "venue": {
+//       "id": 71553,
+//   },
+//   "startdate": "2021-09-25T19:00:00+00:00",
+//   "enddate": "2021-09-25T21:00:00+00:00",
+// }
+// ]
+  
+
+// const filterRepeatingEvents = (arr) => {
+//   const arrayWithStartEndDates = arr.map((el, i) => {
+//     let last = arr.lastIndexOf(el);
+//     i !== last & el.venue.id === el[last].venue.id? { ...el, "enddate": el[last].enddate } : el
+//   })
+//   return arrayWithStartEndDates;
+// }
+
+// const newFilterRepeatingEvents = (arr) => {
+//   return arr.filter((el, i) => {
+//     let last = arr.lastIndexOf(el);
+//     i !== last & el.venue.id === arr[last].venue.id? { ...el, "enddate": arr[last].enddate } : el
+//   })
+// }
+
+
+
+
+
 
 // Create a fetchfunc that takes in the two values in global state (loc and cat)
 // inside fetchfunc, have a conditional that will make a fetch based on category being restaurant, specified cat or no cat
