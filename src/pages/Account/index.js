@@ -25,9 +25,7 @@ function Account() {
 
     return (
         <>
-        <h2>Your saved restaurants</h2>
         {restaurantElements}
-        <h2>Your saved events</h2>
         {eventElements}
         </>
     );

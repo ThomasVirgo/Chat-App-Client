@@ -4,10 +4,13 @@ import { useSelector } from 'react-redux';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { ReviewModal } from '..'
 
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
+  
   const [buttonText, setButtonText] = useState("SAVE")
+  const [isModalActive, setIsModalActive] = useState(false);
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -42,10 +45,15 @@ function RestaurantCard({ result }) {
       setButtonText('SAVED');
     }
   }
-  console.log(enteredUsername)
+  
+  function toggleModal(){
+    let newState = !isModalActive;
+    setIsModalActive(newState)
+  }
 
   let tokenStr = localStorage.getItem('token');
   return (
+    <>
     <div className="eventWrapper">
       <h1>{result.name}</h1>
       <div className="image" style={{ backgroundImage: `url(${result.photo_url})` }}></div>
@@ -56,8 +64,10 @@ function RestaurantCard({ result }) {
       </div>
       <button onClick={goToWebsite}>WEBSITE</button>
       {tokenStr && <button onClick={savetoDb}>{buttonText}</button>} {/*interim solution - need to toggle and unsave, too*/}
-      <button>ADD REVIEW</button>
+      <button onClick={toggleModal}>ADD REVIEW</button>
     </div>
+    {isModalActive && <ReviewModal result={result} toggleModal={toggleModal}/>}
+    </>
   );
 }
 

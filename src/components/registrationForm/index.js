@@ -33,6 +33,7 @@ const RegistrationForm = () => {
       if (data.username) {
         const response = await axios.post('http://localhost:8000/users/login/', { username, password });
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('username', username)
         setShouldRedirect(true);
         dispatch(loginUser());
       }
@@ -61,7 +62,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/account" />}
+      {shouldRedirect && <Redirect to="/" />}
       <div className="login">
         <div className="login__content">
           {/* create a svg on figma with vibe in it? */}
