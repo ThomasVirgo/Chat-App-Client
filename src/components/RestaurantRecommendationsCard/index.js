@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './style.css'
+import { scrubStr } from "../../actions";
 
 
 const RestaurantRecommendationsCard = ({ result }) => {
@@ -10,7 +11,7 @@ const RestaurantRecommendationsCard = ({ result }) => {
     <div id="recommendationsCard">
       <h4>Review by {result.username}</h4>
       <p>created on {result.created_on.slice(0, 10)}:</p>
-      <h2><p><i>{result.message}</i></p></h2>
+      <h2><p><i>{scrubStr(result.message)}</i></p></h2>
       <p>Rating given: {result.rating}</p>
       {/* <div id="header">
         <h1>Review by {result.username}</h1>

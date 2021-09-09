@@ -1,16 +1,28 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 // import './style.css'
 
 const AccountEventCard = ({ result }) => {
-  const [isViewable, setIsViewable] = useState(true); //temporary - kinda works but not really
+  const [isViewable, setIsViewable] = useState(result.is_viewable); //temporary - kinda works but not really
   console.log(result);
 
-  const isViewed = () => {
-    setIsViewable(false)
+  async function isViewed(){
+    try {
+      let token = localStorage.getItem('token');
+      let obj = {...result, is_viewable: false}
+      console.log(obj)
+      if (token) {
+        const { data } = await axios.put(`http://localhost:8000/places/events/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+        console.log(data)
+        setIsViewable(false)
+    } }
+    catch (error) {
+      console.log(error)
+    }
   }
-  // if (isViewable){
+
     return (
       <>
       {isViewable ? 

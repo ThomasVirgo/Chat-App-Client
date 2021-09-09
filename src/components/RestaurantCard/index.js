@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { ReviewModal } from '..'
 
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  const [buttonText, setButtonText] = useState("Save")
+  
+  const [buttonText, setButtonText] = useState("SAVE")
   const [isModalActive, setIsModalActive] = useState(false);
   let username= localStorage.getItem('username');
 
@@ -42,14 +42,7 @@ function RestaurantCard({ result }) {
     
     if (token) {
       await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `token ${token}` }},);
-      // console.log(data)
-      setButtonText('Saved');
-      console.log(buttonText);
-      setTimeout(() => {
-        setButtonText('Save');
-        console.log(buttonText);
-      }, 2000)
-
+      setButtonText('SAVED');
     }
   }
   
