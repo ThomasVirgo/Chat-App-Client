@@ -43,7 +43,7 @@
     "test": "jest --watch --verbose --setupFilesAfterEnv ./src/test/setupTests.js",
     "coverage": "jest --setupFilesAfterEnv ./src/test/setupTests.js --coverage --silent --watchAll=false",
     "dev": "webpack-cli serve --mode development --config config/webpack.config.dev.js",
-    "build": "webpack --config config/webpack.config.production.js && cp src/_redirects build/_redirects"
+    "build": "webpack --config config/webpack.config.production.js"
   },
   "jest": {
     "moduleNameMapper": {
