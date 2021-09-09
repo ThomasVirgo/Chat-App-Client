@@ -1,9 +1,8 @@
 .slider-card{
     display: flex;
     border: 1px solid red;
-    /* margin-right: 100px; */
-    /* margin: auto; */
-    /* text-align: center; */
+    justify-content: center;
+    width: 70%
 }
 
 .slider-card>button {
@@ -14,4 +13,16 @@
     cursor:pointer;
     overflow: hidden;
     margin: auto;
+    justify-content: center;
+}
+
+.slider-card>div{
+    margin: auto;
+    display: flex;
+    /* width: 90%; */
+    justify-content: center;
+}
+
+.attempt1{
+    width: 90%
 }

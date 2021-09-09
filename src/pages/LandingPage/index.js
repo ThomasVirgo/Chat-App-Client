@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Slider, SearchForm } from "../../components";
 import goodvibes from '../../img/goodvibes.gif'
 import axios from 'axios'
-// import './style.css'
+import './style.css'
 
 function LandingPage() {
     const [sliderResults, setSliderResults] = useState([])

@@ -55,4 +55,6 @@
     transition: border-color 0.2s;
 }
   
-  
+.slider-card {
+  margin: auto;
+}
