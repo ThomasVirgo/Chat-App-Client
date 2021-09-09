@@ -13,8 +13,8 @@ function Account() {
     // need to get the username from redux store, not hard code..
 
     useEffect(async ()=>{
-        let restaurants = await axios.get(`http://localhost:8000/places/user/restaurants/${username}`)
-        let events = await axios.get(`http://localhost:8000/places/user/events/${username}`)
+        let restaurants = await axios.get(`https://vibe-drf-api.herokuapp.com/places/user/restaurants/${username}`)
+        let events = await axios.get(`https://vibe-drf-api.herokuapp.com/places/user/events/${username}`)
         console.log(restaurants)
         console.log(events)
         setUserRestaurants(restaurants.data)

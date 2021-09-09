@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   async function sendDetailsToServer() {
     const payload = { username, password };
-    const { data } = await axios.post('http://localhost:8000/users/login/', payload);
+    const { data } = await axios.post('https://vibe-drf-api.herokuapp.com/users/login/', payload);
     console.log(data.token);
     if (data.token) {
       localStorage.setItem('token', data.token);

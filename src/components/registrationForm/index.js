@@ -29,9 +29,9 @@ const RegistrationForm = () => {
         password,
         password_confirmation: confirmPassword,
       };
-      const { data } = await axios.post('http://localhost:8000/users/register/', payload);
+      const { data } = await axios.post('https://vibe-drf-api.herokuapp.com/users/register/', payload);
       if (data.username) {
-        const response = await axios.post('http://localhost:8000/users/login/', { username, password });
+        const response = await axios.post('https://vibe-drf-api.herokuapp.com/users/login/', { username, password });
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('username', username)
         setShouldRedirect(true);

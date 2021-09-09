@@ -8,7 +8,7 @@ function LandingPage() {
     const [sliderResults, setSliderResults] = useState([])
 
     useEffect(async()=> {
-        const {data} = await axios.get('http://localhost:8000/places/reviews/best')
+        const {data} = await axios.get('https://vibe-drf-api.herokuapp.com/places/reviews/best')
         const {events, restaurants} = data
         let restaurantResults, eventResults
         restaurants.length >= 3 ? restaurantResults = restaurants.slice(0, 3) : restaurantResults = restaurants

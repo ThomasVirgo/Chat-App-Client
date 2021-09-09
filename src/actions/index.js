@@ -23,7 +23,7 @@ export const fetchSearchResults = (location, cat) => {
   return async (dispatch) => {
     try {
       if (cat === 'Dining') {
-        const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/${location}/`);
+        const { data } = await axios.get(`https://vibe-drf-api.herokuapp.com/apis/restaurant-search/${location}/`);
         // if (data) => raise error if not
         let resultsArray = data;
         // console.log(data);
@@ -32,7 +32,7 @@ export const fetchSearchResults = (location, cat) => {
           payload: resultsArray,
         });
       } else if (cat === 'ALL') {
-        const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london`);
+        const { data } = await axios.get(`https://vibe-drf-api.herokuapp.com/apis/event-search/${location}%20%london`);
         let resultsArray = uniqueEvents(data);
         console.log(resultsArray);
         dispatch({
@@ -40,7 +40,7 @@ export const fetchSearchResults = (location, cat) => {
           payload: resultsArray,
         });
       } else {
-        const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london/${cat}`);
+        const { data } = await axios.get(`https://vibe-drf-api.herokuapp.com/apis/event-search/${location}%20%london/${cat}`);
         let resultsArray = uniqueEvents(data);
         console.log(resultsArray);
         dispatch({

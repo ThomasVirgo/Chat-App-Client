@@ -32,7 +32,7 @@ function EventCard({ result }) {
 
     let token = localStorage.getItem('token');
     if (token) {
-      await axios.post(`http://localhost:8000/places/events/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+      await axios.post(`https://vibe-drf-api.herokuapp.com/places/events/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
       setButtonText('SAVED');
     }
   }
