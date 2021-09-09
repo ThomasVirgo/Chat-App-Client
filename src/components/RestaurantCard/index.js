@@ -7,7 +7,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  const [buttonText, setButtonText] = useState("Save")
+  const [buttonText, setButtonText] = useState("SAVE")
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -39,14 +39,7 @@ function RestaurantCard({ result }) {
     
     if (token) {
       await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `token ${token}` }},);
-      // console.log(data)
-      setButtonText('Saved');
-      console.log(buttonText);
-      setTimeout(() => {
-        setButtonText('Save');
-        console.log(buttonText);
-      }, 2000)
-
+      setButtonText('SAVED');
     }
   }
   console.log(enteredUsername)
