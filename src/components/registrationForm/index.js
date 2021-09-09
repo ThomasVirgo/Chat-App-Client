@@ -62,7 +62,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/account" />}
+      {shouldRedirect && <Redirect to="/" />}
       <div className="login">
         <div className="login__content">
           {/* create a svg on figma with vibe in it? */}
