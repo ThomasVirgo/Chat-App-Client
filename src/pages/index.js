@@ -4,3 +4,4 @@ export { default as Login } from "./Login";
 export { default as Recommendations } from "./Recommendations";
 export { default as Register } from "./Register";
 export { default as SearchResults } from "./SearchResults";
+export { default as NotFound } from "./NotFound";

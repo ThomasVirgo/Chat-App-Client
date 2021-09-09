@@ -1,0 +1,5 @@
+.home-button {
+    text-decoration: none;
+    color: var(--first-color);
+    padding-left: 15px;
+}
