@@ -6,12 +6,6 @@ a{
     text-decoration: none;
 }
 
-img{
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
 .login{
     display: grid;
     grid-template-columns: 100%;
