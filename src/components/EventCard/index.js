@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 function EventCard({ result }) {
+  const [buttonText, setButtonText] = useState("SAVE")
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  console.log(enteredUsername);
 
   async function savetoDb() {
     let obj = {
@@ -29,8 +29,8 @@ function EventCard({ result }) {
 
     let token = localStorage.getItem('token');
     if (token) {
-      const { data } = await axios.post(`http://localhost:8000/places/events/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
-      console.log(data)
+      await axios.post(`http://localhost:8000/places/events/`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+      setButtonText('SAVED');
     }
   }
   let tokenStr = localStorage.getItem('token');
@@ -52,8 +52,8 @@ function EventCard({ result }) {
         <p>Open from: {result.openingtimes.doorsopen}{result.openingtimes.lastentry ? ` Last Entry: ${result.openingtimes.lastentry}` : ''}</p>
           <p>Entry Fee: {scrubStr(result.entryprice)}</p>
       </div>
-          <button onClick={() => window.open(result.link, '_blank')}>Buy Tickets</button>
-          {tokenStr && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too: if (enteredUsername !== '' && isSaved) etc*/}
+          <button onClick={() => window.open(result.link, '_blank')}>BUY TICKETS</button>
+          {tokenStr && <button onClick={savetoDb}>{buttonText}</button>} {/*interim solution - need to toggle and unsave, too: if (enteredUsername !== '' && isSaved) etc*/}
       </div>
   );
 }
