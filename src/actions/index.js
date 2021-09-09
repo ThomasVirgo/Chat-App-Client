@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// getting unique events
+const uniqueEvents = (arr) => arr.filter((el, i) => dummyData.findIndex(obj => obj.eventname === el.eventname) === i)
+
 export const loginUser = (enteredUsername) => {
   // console.log(enteredUsername) fine here too - accessed username
   return {
@@ -30,16 +33,16 @@ export const fetchSearchResults = (location, cat) => {
         });
       } else if (cat === 'ALL') {
         const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london`);
-        let resultsArray = data;
-        console.log(data);
+        let resultsArray = uniqueEvents(data);
+        console.log(resultsArray);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
         });
       } else {
         const { data } = await axios.get(`http://localhost:8000/apis/event-search/${location}%20%london/${cat}`);
-        let resultsArray = data;
-        // console.log(data);
+        let resultsArray = uniqueEvents(data);
+        console.log(resultsArray);
         dispatch({
           type: 'GETRESULTS',
           payload: resultsArray,
@@ -78,6 +81,7 @@ export const scrubStr = (str) => {
     .replaceAll("&#128266", "");
   return cleanStr;
 };
+
 
 
 // const dummyData = [{
