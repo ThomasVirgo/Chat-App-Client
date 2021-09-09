@@ -33,6 +33,7 @@ const RegistrationForm = () => {
       if (data.username) {
         const response = await axios.post('http://localhost:8000/users/login/', { username, password });
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('username', username)
         setShouldRedirect(true);
         dispatch(loginUser());
       }
