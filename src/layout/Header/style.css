@@ -23,3 +23,11 @@
     font-family: 'Indie Flower', cursive;
     font-size: 1.25rem;
 }
+
+@media screen and (max-width: 500px){
+    #nav-slogan{
+        width: 50vw;
+        font-size: 1rem;
+        text-align: center;
+    }
+}
