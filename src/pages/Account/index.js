@@ -7,7 +7,8 @@ import { AccountEventCard } from '../../components'
 function Account() {
     const [userRestaurants, setUserRestaurants] = useState([])
     const [userEvents, setUserEvents] = useState([])
-    const username = useSelector(state => state.authReducer.username)
+    // const username = useSelector(state => state.authReducer.username)
+    const username = localStorage.getItem('username');
 
     // need to get the username from redux store, not hard code..
 

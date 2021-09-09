@@ -10,6 +10,7 @@ function RestaurantCard({ result }) {
   
   const [buttonText, setButtonText] = useState("SAVE")
   const [isModalActive, setIsModalActive] = useState(false);
+  let username= localStorage.getItem('username');
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -31,7 +32,7 @@ function RestaurantCard({ result }) {
       address: result.address,
       rating: result.rating,
       total_ratings: result.total_ratings,
-      username: enteredUsername,
+      username: username,
       category: result.category,
     };
     console.log(obj);

@@ -11,3 +11,4 @@ export { default as Slider } from './Slider';
 export { default as AccountEventCard } from './AccountEventCard';
 export { default as SearchForm } from './SearchForm';
 export { default as ReviewModal } from './ReviewModal';
+export { default as ReviewCard } from './ReviewCard';
