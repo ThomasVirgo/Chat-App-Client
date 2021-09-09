@@ -12,6 +12,7 @@ function RestaurantCard({ result }) {
   const [isViewable, setIsViewable] = useState(true);
   const [buttonText, setButtonText] = useState("SAVE")
   const [isModalActive, setIsModalActive] = useState(false);
+  let username= localStorage.getItem('username');
 
   const pathname = window.location.pathname
 
@@ -59,7 +60,7 @@ function RestaurantCard({ result }) {
       address: result.address,
       rating: result.rating,
       total_ratings: result.total_ratings,
-      username: 'theboss',
+      username: username,
       category: result.category,
     };
     console.log(obj);

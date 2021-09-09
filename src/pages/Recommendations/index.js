@@ -1,52 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { RestaurantRecommendationsCard } from '../../components'
-import { EventRecommendationsCard } from '../../components'
+import { RestaurantCard, AccountEventCard, ReviewCard } from "../../components";
 
 
 const Recommendations = () => {
-    const [restaurantResults, setRestaurantResults] = useState([]);
-    const [eventResults, setEventResults] = useState([]);
+    const [dataArray, setDataArray] = useState([])
 
-    useEffect(() => {
-        const fetchRestaurantRecommendations = async () => {
-            try {
-                let { data } = await axios.get(`http://localhost:8000/places/restaurant-reviews`)
-                setRestaurantResults(data.map(el => el = { ...el, category: "restaurant" }))
-            } catch (err) {
-                console.warn(err)
-            }
+    useEffect(async ()=>{
+        const {data} = await axios.get(`http://localhost:8000/places/reviews/latest`)
+        let arr = []
+        for (let key in data){
+            arr.push(data[key])
         }
-        fetchRestaurantRecommendations();
-
-    }, [])
-        
-    useEffect(() => {
-        const fetchEventRecommendations = async () => {
-            try {
-                let { data } = await axios.get(`http://localhost:8000/places/event-reviews`)
-                setEventResults(data.map(el => el = { ...el, category: "event" }))
-            } catch (err) {
-                console.warn(err)
-            }
-        }
-        fetchEventRecommendations();
+        console.log(arr)
+        setDataArray(arr)
     }, [])
 
-    // randomizing the order of array elements:
-    const combinedResults = [...restaurantResults, ...eventResults].sort((a, b) => 0.5 - Math.random());;
-
-    // console.log(restaurantResults)
-    // console.log(eventResults)
-    // console.log(combinedResults);
-
-
-    const resultsCards = combinedResults.map((result, idx) => result.category === 'restaurant' ? <div key={idx}><RestaurantRecommendationsCard result={result}/></div> : <div key={idx}><EventRecommendationsCard result={result}/></div>)
-      return (
+    let elements = dataArray.map((item, idx) => {
+        if (item.restaurant){
+            return <div key={idx}>
+                <RestaurantCard result={item.restaurant} />
+                <h3 style= {{"textAlign":"center"}} >Reviews for {item.restaurant.name} </h3>
+                {item.reviews.map((review, itemIdx) => <div key={itemIdx}><ReviewCard review={review}/></div>)}
+            </div>
+        } else {
+            return <div key={idx}>
+                <AccountEventCard result={item.event} />
+                {item.reviews.map((review, itemIdx) => <div key={itemIdx}><ReviewCard review={review}/></div>)}
+            </div>
+        }
+    })
+    return (
         <>
-          {resultsCards}
+        {elements}
         </>
-      );
+    )
 }
 
 export default Recommendations;
