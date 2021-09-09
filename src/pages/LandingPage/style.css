@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 .search__form{
     display: flex;
     flex-direction: column;
@@ -57,4 +58,44 @@
   
 .slider-card {
   margin: auto;
+}
+
+#landing-content{
+  padding-top: 3vh;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  /* border: 1px solid red; */
+  text-align: center;
+}
+
+#landing-content>h3 {
+  font-family: 'Poppins';
+  font-weight: 300;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 70%;
+  /* border: 1px solid red; */
+}
+
+
+#brand-logo{
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  width: 30vh;
+  height: auto;
+  /* border: 1px solid red; */
+  padding-bottom: 5vh;
+}
+
+@media screen and (max-width: 768px){
+  #landing-content>h3{
+    width: 90%;
+  }
+  #brand-logo{
+    width: 90%;
+  }
 }
