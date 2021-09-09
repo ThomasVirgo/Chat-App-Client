@@ -65,7 +65,54 @@ const ReviewModal = ({result, toggleModal}) => {
                     console.log(error)
                 }
             }
-        }
+        } 
+
+        if (result.category == 'event'){
+            try {
+                let {data} = await axios.get(`http://localhost:8000/places/events/find/${result.name}/`)
+                let review = {
+                    message,
+                    rating,
+                    event_id: data.id,
+                    username: localStorage.getItem('username')
+                }
+                let postData = await axios.post(`http://localhost:8000/places/event-reviews/`, review)
+                console.log(postData)
+            } catch (error) {
+                console.log(error)
+                try {
+                    let obj = {
+                        event_name: result.eventname,
+                        venue_name: result.venue.name,
+                        venue_address: result.venue.address, 
+                        venue_type: result.venue.type,
+                        entry_price: result.entryprice,
+                        starts_at: result.openingtimes.doorsopen,
+                        ends_at: result.openingtimes.doorsclose,
+                        start_date: result.startdate,
+                        link: result.link,
+                        end_date: result.enddate,
+                        photo_url: result.largeimageurl,
+                        description: result.description,
+                        username: localStorage.getItem('username'),
+                        category: result.category,
+                      };
+                    let saveEvent = await axios.post(`http://localhost:8000/places/events/`, obj)
+                    console.log(saveEvent)
+                    let review = {
+                        message,
+                        rating,
+                        event_id: data.id,
+                        username: localStorage.getItem('username')
+                    }
+                    let postData = await axios.post(`http://localhost:8000/places/event-reviews/`, review)
+                    console.log(postData)
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        } 
     }
 
     return (

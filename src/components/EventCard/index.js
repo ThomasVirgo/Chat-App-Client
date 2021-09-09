@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { scrubStr } from "../../actions";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { ReviewModal } from '..'
 
 function EventCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
-  console.log(enteredUsername);
+  const [isModalActive, setIsModalActive] = useState(false)
+  let username = localStorage.getItem('username');
 
   async function savetoDb() {
     let obj = {
@@ -23,7 +25,7 @@ function EventCard({ result }) {
       end_date: result.enddate,
       photo_url: result.largeimageurl,
       description: result.description,
-      username: enteredUsername,
+      username: username,
       category: result.category,
     };
 
@@ -33,15 +35,20 @@ function EventCard({ result }) {
       console.log(data)
     }
   }
+
+  function toggleModal(){
+    let newState = !isModalActive;
+    setIsModalActive(newState)
+  }
+
   let tokenStr = localStorage.getItem('token');
-  
-  console.log(enteredUsername)
 
   const background = result.largeimageurl;
 
   
 
   return (
+    <>
     <div className="eventWrapper">
         <h1>{scrubStr(result.eventname)}</h1>
       <div className="image" style={{ backgroundImage: `url(${background})` }}></div>
@@ -54,7 +61,9 @@ function EventCard({ result }) {
       </div>
           <button onClick={() => window.open(result.link, '_blank')}>Buy Tickets</button>
           {tokenStr && <button onClick={savetoDb}>Save</button>} {/*interim solution - need to toggle and unsave, too: if (enteredUsername !== '' && isSaved) etc*/}
-      </div>
+    </div>
+    {isModalActive && <ReviewModal result={result} toggleModal={toggleModal}/>}
+    </>
   );
 }
 
