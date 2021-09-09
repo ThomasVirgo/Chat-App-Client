@@ -5,7 +5,7 @@ import axios from 'axios';
 // import './style.css'
 
 const AccountEventCard = ({ result }) => {
-  const [isViewable, setIsViewable] = useState(result.is_viewable); //temporary - kinda works but not really
+  const [isViewable, setIsViewable] = useState(result.is_viewable);
   console.log(result);
 
   async function isViewed(){
