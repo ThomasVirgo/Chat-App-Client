@@ -55,7 +55,7 @@ function EventCard({ result }) {
       <div className="image" style={{ backgroundImage: `url(${background})` }}></div>
       <div className="details"><h3>{scrubStr(result.description)}</h3>
 
-            {/* <div className="card-dates"><FontAwesomeIcon icon={faCalendarAlt}/>{result.startdate.slice(0, 10)} - {result.enddate.slice(0, 10)}</div> */}
+            <div className="card-dates"><FontAwesomeIcon icon={faCalendarAlt}/>   {result.startdate.slice(0, 10)} - {result.enddate.slice(0, 10)}</div>
         <p>Address:<br/>{scrubStr(result.venue.address)} {result.venue.town} {result.venue.postcode}</p>
         <p>Open from: {result.openingtimes.doorsopen}{result.openingtimes.lastentry ? ` Last Entry: ${result.openingtimes.lastentry}` : ''}</p>
           <p>Entry Fee: {scrubStr(result.entryprice)}</p>

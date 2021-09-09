@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // getting unique events
-const uniqueEvents = (arr) => arr.filter((el, i) => dummyData.findIndex(obj => obj.eventname === el.eventname) === i)
+const uniqueEvents = (arr) => arr.filter((el, i) => arr.findIndex(obj => obj.eventname === el.eventname) === i)
 
 export const loginUser = (enteredUsername) => {
   // console.log(enteredUsername) fine here too - accessed username
