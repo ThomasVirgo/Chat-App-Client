@@ -5,6 +5,7 @@ import './style.css';
 const ReviewModal = ({result, toggleModal}) => {
     const [message, setMessage] = useState('')
     const [rating, setRating] = useState(5)
+    let username= localStorage.getItem('username');
 
     function handleMessage(e){
         let newMessage = e.target.value;
@@ -27,7 +28,7 @@ const ReviewModal = ({result, toggleModal}) => {
     async function submitReview(){
         if (result.category == 'restaurant'){
             try {
-                let {data} = await axios.get(`http://localhost:8000/places/restaurants/find/${result.name}/`)
+                let {data} = await axios.get(`http://localhost:8000/places/restaurants/find/${result.name}/${username}`)
                 let review = {
                     message,
                     rating,
@@ -46,7 +47,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         address: result.address,
                         rating: result.rating,
                         total_ratings: result.total_ratings,
-                        username: localStorage.getItem('username'),
+                        username: username,
                         is_viewable: false,
                         category: result.category,
                       };
@@ -69,7 +70,7 @@ const ReviewModal = ({result, toggleModal}) => {
 
         if (result.category == 'event'){
             try {
-                let {data} = await axios.get(`http://localhost:8000/places/events/find/${result.name}/`)
+                let {data} = await axios.get(`http://localhost:8000/places/events/find/${result.name}/${username}`)
                 let review = {
                     message,
                     rating,
@@ -94,7 +95,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         end_date: result.enddate,
                         photo_url: result.largeimageurl,
                         description: result.description,
-                        username: localStorage.getItem('username'),
+                        username: username,
                         category: result.category,
                       };
                     let saveEvent = await axios.post(`http://localhost:8000/places/events/`, obj)
