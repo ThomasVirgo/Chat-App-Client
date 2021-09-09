@@ -28,14 +28,14 @@ const ReviewModal = ({result, toggleModal}) => {
     async function submitReview(){
         if (result.category == 'restaurant'){
             try {
-                let {data} = await axios.get(`http://localhost:8000/places/restaurants/find/${result.name}/${username}`)
+                let {data} = await axios.get(`https://vibe-drf-api.herokuapp.com/places/restaurants/find/${result.name}/${username}`)
                 let review = {
                     message,
                     rating,
                     restaurant_id: data.id,
                     username: localStorage.getItem('username')
                 }
-                let postData = await axios.post(`http://localhost:8000/places/restaurant-reviews/`, review)
+                let postData = await axios.post(`https://vibe-drf-api.herokuapp.com/places/restaurant-reviews/`, review)
                 console.log(postData)
             } catch (error) {
                 console.log(error)
@@ -51,7 +51,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         is_viewable: false,
                         category: result.category,
                       };
-                    let saveRestaurant = await axios.post(`http://localhost:8000/places/restaurants/`, obj)
+                    let saveRestaurant = await axios.post(`https://vibe-drf-api.herokuapp.com/places/restaurants/`, obj)
                     console.log(saveRestaurant)
                     let review = {
                         message,
@@ -59,7 +59,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         restaurant_id: saveRestaurant.data.id,
                         username: localStorage.getItem('username')
                     }
-                    let postData = await axios.post(`http://localhost:8000/places/restaurant-reviews/`, review)
+                    let postData = await axios.post(`https://vibe-drf-api.herokuapp.com/places/restaurant-reviews/`, review)
                     console.log(postData)
 
                 } catch (error) {
@@ -70,14 +70,14 @@ const ReviewModal = ({result, toggleModal}) => {
 
         if (result.category == 'event'){
             try {
-                let {data} = await axios.get(`http://localhost:8000/places/events/find/${result.name}/${username}`)
+                let {data} = await axios.get(`https://vibe-drf-api.herokuapp.com/places/events/find/${result.name}/${username}`)
                 let review = {
                     message,
                     rating,
                     event_id: data.id,
                     username: localStorage.getItem('username')
                 }
-                let postData = await axios.post(`http://localhost:8000/places/event-reviews/`, review)
+                let postData = await axios.post(`https://vibe-drf-api.herokuapp.com/places/event-reviews/`, review)
                 console.log(postData)
             } catch (error) {
                 console.log(error)
@@ -98,7 +98,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         username: username,
                         category: result.category,
                       };
-                    let saveEvent = await axios.post(`http://localhost:8000/places/events/`, obj)
+                    let saveEvent = await axios.post(`https://vibe-drf-api.herokuapp.com/places/events/`, obj)
                     console.log(saveEvent)
                     let review = {
                         message,
@@ -106,7 +106,7 @@ const ReviewModal = ({result, toggleModal}) => {
                         event_id: saveEvent.data.id,
                         username: localStorage.getItem('username')
                     }
-                    let postData = await axios.post(`http://localhost:8000/places/event-reviews/`, review)
+                    let postData = await axios.post(`https://vibe-drf-api.herokuapp.com/places/event-reviews/`, review)
                     console.log(postData)
 
                 } catch (error) {

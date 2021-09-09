@@ -7,7 +7,7 @@ const Recommendations = () => {
     const [dataArray, setDataArray] = useState([])
 
     useEffect(async ()=>{
-        const {data} = await axios.get(`http://localhost:8000/places/reviews/latest`)
+        const {data} = await axios.get(`https://vibe-drf-api.herokuapp.com/places/reviews/latest`)
         let arr = []
         for (let key in data){
             arr.push(data[key])

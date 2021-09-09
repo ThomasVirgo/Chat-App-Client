@@ -14,7 +14,7 @@ const AccountEventCard = ({ result }) => {
       let obj = {...result, is_viewable: false}
       console.log(obj)
       if (token) {
-        const { data } = await axios.put(`http://localhost:8000/places/events/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+        const { data } = await axios.put(`https://vibe-drf-api.herokuapp.com/places/events/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
         console.log(data)
         setIsViewable(false)
     } }

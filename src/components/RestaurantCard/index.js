@@ -25,7 +25,7 @@ function RestaurantCard({ result }) {
   }, [])
 
   async function goToWebsite() {
-    const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
+    const { data } = await axios.get(`https://vibe-drf-api.herokuapp.com/apis/restaurant-search/website/${result.place_id}`);
     console.log(data);
     if (data != 'Not Available') {
       window.open(data, '_blank');
@@ -40,7 +40,7 @@ function RestaurantCard({ result }) {
       let obj = {...result, is_viewable: false} //check isviewable same name
       console.log(obj)
       if (token) {
-        const { data } = await axios.put(`http://localhost:8000/places/restaurants/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+        const { data } = await axios.put(`https://vibe-drf-api.herokuapp.com/places/restaurants/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
         console.log(data)
         setIsViewable(false)
         setButtonText('UNSAVED');
@@ -77,7 +77,7 @@ function RestaurantCard({ result }) {
     console.log(token);
     
     if (token) {
-      await axios.post(`http://localhost:8000/places/restaurants/`, obj,  {headers: {"Authorization": `token ${token}` }},);
+      await axios.post(`https://vibe-drf-api.herokuapp.com/places/restaurants/`, obj,  {headers: {"Authorization": `token ${token}` }},);
       setButtonText('SAVED');
     }
   }
