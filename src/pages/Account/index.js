@@ -24,6 +24,7 @@ function Account() {
     const restaurantElements = userRestaurants.map((result, idx) => result.is_viewable ? <div key={idx}><RestaurantCard result={result}/></div> : '')
     const eventElements = userEvents.map((result, idx) => <div key={idx}><AccountEventCard result={result}/></div>)
 
+    
     return (
         <>
         {restaurantElements}

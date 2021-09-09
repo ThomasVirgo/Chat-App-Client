@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,11 +10,19 @@ import { ReviewModal } from '..'
 function RestaurantCard({ result }) {
   const enteredUsername = useSelector((state) => state.authReducer.username);
   const [isViewable, setIsViewable] = useState(true);
-  const [buttonText, setButtonText] = useState("SAVE")
+  const [buttonText, setButtonText] = useState("")
   const [isModalActive, setIsModalActive] = useState(false);
   let username= localStorage.getItem('username');
 
   const pathname = window.location.pathname
+
+  useEffect(()=>{
+    if (pathname.includes('account')){
+      setButtonText('UNSAVE')
+    } else {
+      setButtonText('SAVE')
+    }
+  }, [])
 
   async function goToWebsite() {
     const { data } = await axios.get(`http://localhost:8000/apis/restaurant-search/website/${result.place_id}`);
@@ -32,7 +40,7 @@ function RestaurantCard({ result }) {
       let obj = {...result, is_viewable: false} //check isviewable same name
       console.log(obj)
       if (token) {
-        const { data } = await axios.put(`http://localhost:8000/places/events/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
+        const { data } = await axios.put(`http://localhost:8000/places/restaurants/${obj.id}`, obj,  {headers: {"Authorization": `Token ${token}` }},);
         console.log(data)
         setIsViewable(false)
         setButtonText('UNSAVED');
