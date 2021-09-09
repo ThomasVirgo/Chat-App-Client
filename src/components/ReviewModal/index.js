@@ -55,7 +55,7 @@ const ReviewModal = ({result, toggleModal}) => {
                     let review = {
                         message,
                         rating,
-                        restaurant_id: data.id,
+                        restaurant_id: saveRestaurant.data.id,
                         username: localStorage.getItem('username')
                     }
                     let postData = await axios.post(`http://localhost:8000/places/restaurant-reviews/`, review)
@@ -102,7 +102,7 @@ const ReviewModal = ({result, toggleModal}) => {
                     let review = {
                         message,
                         rating,
-                        event_id: data.id,
+                        event_id: saveEvent.data.id,
                         username: localStorage.getItem('username')
                     }
                     let postData = await axios.post(`http://localhost:8000/places/event-reviews/`, review)
@@ -120,9 +120,13 @@ const ReviewModal = ({result, toggleModal}) => {
             <i className='bx bx-x menu-btn' onClick={toggleModal}></i>
             <h2>Review for {result.name}</h2>
             <form onSubmit={handleSubmit}>
-                <textarea name="message" id="message" cols="30" rows="10" value={message} onChange={handleMessage}></textarea>
-                <input type="range" min="1" max="10" value={rating} onChange={handleRating} />
-                <input type="submit" value="Submit" />
+                <textarea placeholder='add message here...' name="message" id="message" cols="30" rows="10" value={message} onChange={handleMessage}></textarea>
+                <div className='slider__container'> 
+                    <p>Rating: </p> 
+                    <input type="range" min="1" max="10" value={rating} onChange={handleRating} />
+                    <p>{rating}/10</p>
+                </div>
+                <input type="submit" value="Submit" className='modal__submit'/>
             </form>
         </div>
     )
