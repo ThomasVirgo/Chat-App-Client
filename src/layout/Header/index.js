@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav} from '../';
+import { Nav } from '../';
 import { NavLink } from 'react-router-dom';
 import goodvibes from '../../img/vibee.gif';
 import './style.css'
