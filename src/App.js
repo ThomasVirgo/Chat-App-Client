@@ -17,7 +17,7 @@ function App() {
         </Route>
         <PrivateRoute path="/account" component={Account} />
         <PrivateRoute path="/recommendations" component={Recommendations} />
-        <LoggedOutRoute path="/login" component={Login} />
+        <LoggedOutRoute path="/login" component={Login} data-testid="loginRoute"/>
         <LoggedOutRoute path="/register" component={Register} />
         <LoggedOutRoute path="/search-results" component={SearchResults} />
         <NotFound />

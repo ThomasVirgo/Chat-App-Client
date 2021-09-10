@@ -22,12 +22,12 @@ const Nav = () => {
     let username = localStorage.getItem('username')
 
     return (
-        <>
-        {!isNavActive && <i className='bx bx-menu menu-btn' onClick={toggleNav}></i>}
+        <div aria-label="navbar">
+        {!isNavActive && <i className='bx bx-menu menu-btn' onClick={toggleNav} aria-label="clickable"></i>}
         {isNavActive && <i className='bx bx-x menu-btn' onClick={toggleNav}></i>}
         {isNavActive &&
-        <div className="wrapper">
-            <ul>
+        <div className="wrapper" aria-label="menu-wrapper">
+            <ul aria-label="navlist">
                 {username && <li onClick={toggleNav} ><NavLink exact to='/account'>Hi {username}!</NavLink></li>}
                 <li onClick={toggleNav}><NavLink exact to='/'>Search</NavLink></li>
                 <li onClick={toggleNav}><NavLink exact to='/account'>Account</NavLink></li>
@@ -38,7 +38,7 @@ const Nav = () => {
             </ul>
         </div>
         }
-        </>
+        </div>
     )
 }
 
