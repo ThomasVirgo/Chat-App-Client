@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Home } from './pages'
+import { LoginForm } from './components'
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+          <LoginForm />
         </Route>
       </Switch>
     </>
