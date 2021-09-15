@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Home, Dashboard } from './pages'
+import { Home, Dashboard, Chat, Account, Friends } from './pages'
 import { LoginForm, RegisterForm } from './components'
 import './style.css'
 
@@ -19,6 +19,15 @@ function App() {
         </Route>
         <Route exact path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route exact path="/friends">
+          <Friends />
+        </Route>
+        <Route exact path="/chat">
+          <Chat />
+        </Route>
+        <Route exact path="/account">
+          <Account />
         </Route>
       </Switch>
     </>

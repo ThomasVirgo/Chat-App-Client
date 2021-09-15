@@ -15,7 +15,7 @@ export default function Dropdown() {
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    history.push(`/dashboard/${e.target.textContent}`)
+    history.push(`/${e.target.textContent}`)
   };
 
   const handleStay = () =>{

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav } from '../../layout'
 
-const Dashboard = () => {
+const Account = () => {
     return (
         <>
         <Nav/>
@@ -9,4 +9,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default Account;
