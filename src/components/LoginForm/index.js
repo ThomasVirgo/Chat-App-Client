@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { requestLogin } from '../../requests'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core'
 import Icon from '@material-ui/core/Icon';
 import './style.css'
@@ -9,6 +9,7 @@ const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState([])
+    const history = useHistory()
 
     function handleUsername(e){
         setUsername(e.target.value)
@@ -22,15 +23,14 @@ const LoginForm = () => {
         e.preventDefault()
         const [ isSuccess, response ]  = await requestLogin({username, password})
         if (isSuccess){
-            console.log(response)
             localStorage.setItem('username', username)
             localStorage.setItem('token', response.token)
-            setErrors(['Login was successful'])
+            history.push('/dashboard')
         } else {
             setErrors(Object.keys(response).map(key => response[key]))
+            setUsername('')
+            setPassword('')
         }
-        setUsername('')
-        setPassword('')
     }
 
     const errorList = errors.map((error,index) => <li key={index}>{error}</li>)
