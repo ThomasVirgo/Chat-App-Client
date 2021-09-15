@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Home } from './pages'
+import { Home, Dashboard } from './pages'
 import { LoginForm, RegisterForm } from './components'
 import './style.css'
 
@@ -16,6 +16,9 @@ function App() {
         </Route>
         <Route exact path="/register">
           <RegisterForm />
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
         </Route>
       </Switch>
     </>

@@ -15,7 +15,7 @@ const Home = () => {
         <>
         {
             isLoggedIn ? 
-            <Redirect to = '/account'/> :
+            <Redirect to = '/dashboard'/> :
             <div className = 'home__container'>
             <Link to='login'>Login</Link>
             <Link to='login'>Register</Link>
