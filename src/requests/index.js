@@ -4,18 +4,18 @@ const SERVER_URL = 'http://localhost:8000';
 async function requestRegister(data){
     try {
         const response = await axios.post(`${SERVER_URL}/auth/register/`, data)
-        console.log(response)
+        return [true, response.data]
     } catch (error) {
-        console.error(error)
+        return [false, error.response.data]
     }
 }
 
 async function requestLogin(data){
     try {
         const response = await axios.post(`${SERVER_URL}/auth/login/`, data)
-        console.log(response)
+        return [true, response.data]
     } catch (error) {
-        console.error(error)
+        return [false, error.response.data]
     }
 }
 
