@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Home } from './pages'
-import { LoginForm } from './components'
+import { LoginForm, RegisterForm } from './components'
 
 
 function App() {
@@ -10,7 +10,12 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/login">
           <LoginForm />
+        </Route>
+        <Route exact path="/register">
+          <RegisterForm />
         </Route>
       </Switch>
     </>
