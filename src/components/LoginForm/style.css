@@ -9,7 +9,7 @@
     padding: 20px;
 }
 
-.login__form h2{
+.login__form h2,p{
     text-align: center;
     font-family: 'Roboto', sans-serif;
     margin: 0;

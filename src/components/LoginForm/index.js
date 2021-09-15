@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { requestLogin } from '../../requests'
+import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core'
 import Icon from '@material-ui/core/Icon';
 import './style.css'
@@ -30,6 +31,7 @@ const LoginForm = () => {
             <h2>Login</h2>
             <TextField label="Username" onChange={handleUsername} />
             <TextField label="Password" type='password' onChange={handlePassword}/>
+            <p>Don't have an account? Register <Link to='/register'> Here </Link></p>
             <Button type='submit' variant="contained" color="primary" endIcon={<Icon>send</Icon>}>Submit</Button>
         </form>
         </>
