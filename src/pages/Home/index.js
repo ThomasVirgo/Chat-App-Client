@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import './style.css'
 
 const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -15,7 +16,7 @@ const Home = () => {
         {
             isLoggedIn ? 
             <Redirect to = '/account'/> :
-            <div>
+            <div className = 'home__container'>
             <Link to='login'>Login</Link>
             <Link to='login'>Register</Link>
             </div>
