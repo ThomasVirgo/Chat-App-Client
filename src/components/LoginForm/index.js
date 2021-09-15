@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { requestLogin } from '../../requests'
 import { TextField, Button } from '@material-ui/core'
 import Icon from '@material-ui/core/Icon';
 import './style.css'
@@ -18,6 +19,9 @@ const LoginForm = () => {
     function handleSubmit(e){
         e.preventDefault()
         console.log(username, password)
+        requestLogin({username, password})
+        setUsername('')
+        setPassword('')
     }
 
     return (
