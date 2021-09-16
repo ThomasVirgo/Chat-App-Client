@@ -6,13 +6,13 @@ import Icon from '@material-ui/core/Icon';
 import './style.css'
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState([])
     const history = useHistory()
 
-    function handleUsername(e){
-        setUsername(e.target.value)
+    function handleEmail(e){
+        setEmail(e.target.value)
     }
 
     function handlePassword(e){
@@ -21,14 +21,14 @@ const LoginForm = () => {
 
     async function handleSubmit(e){
         e.preventDefault()
-        const [ isSuccess, response ]  = await requestLogin({username, password})
+        const [ isSuccess, response ]  = await requestLogin({username:email, password})
         if (isSuccess){
-            localStorage.setItem('username', username)
+            localStorage.setItem('username', email)
             localStorage.setItem('token', response.token)
             history.push('/dashboard')
         } else {
             setErrors(Object.keys(response).map(key => response[key]))
-            setUsername('')
+            setEmail('')
             setPassword('')
         }
     }
@@ -39,7 +39,7 @@ const LoginForm = () => {
         <>
         <form onSubmit={handleSubmit} className='login__form'>
             <h2>Login</h2>
-            <TextField label="Username" value={username} onChange={handleUsername} required/>
+            <TextField label="Email" value={email} onChange={handleEmail} required/>
             <TextField label="Password" type='password' value={password} onChange={handlePassword} required/>
             <p>Don't have an account? Register <Link to='/register'> Here </Link></p>
             { !!errors.length && <ul>{errorList}</ul> }

@@ -6,13 +6,13 @@ import Icon from '@material-ui/core/Icon';
 import './style.css'
 
 const RegisterForm = () => {
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState([])
 
-    function handleUsername(e){
-        setUsername(e.target.value)
+    function handleEmail(e){
+        setEmail(e.target.value)
     }
 
     function handlePassword(e){
@@ -25,14 +25,14 @@ const RegisterForm = () => {
 
     async function handleSubmit(e){
         e.preventDefault()
-        console.log(username, password, confirmPassword)
-        const [ isSuccess, response ]  = await requestRegister({username, password, password_confirmation: confirmPassword})
+        console.log(email, password, confirmPassword)
+        const [ isSuccess, response ]  = await requestRegister({username:email, email, password, password_confirmation: confirmPassword})
         if (isSuccess){
             setErrors(['You have successfully registered'])
         } else {
             setErrors(Object.keys(response).map(key => response[key]))
         }
-        setUsername('')
+        setEmail('')
         setPassword('')
         setConfirmPassword('')
     }
@@ -43,7 +43,7 @@ const RegisterForm = () => {
         <>
         <form onSubmit={handleSubmit} className='login__form'>
             <h2>Register</h2>
-            <TextField label="Username" value={username} onChange={handleUsername} required/>
+            <TextField label="Email" value={email} onChange={handleEmail} required/>
             <TextField label="Password" type='password' value={password} onChange={handlePassword} required/>
             <TextField label="Confirm Password" type='password' value={confirmPassword} onChange={handleConfirm} required/>
             <p>Already have an account? Login <Link to='/login'> Here </Link> </p>
