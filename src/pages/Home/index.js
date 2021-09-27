@@ -18,7 +18,7 @@ const Home = () => {
             <Redirect to = '/dashboard'/> :
             <div className = 'home__container'>
             <Link to='login'>Login</Link>
-            <Link to='login'>Register</Link>
+            <Link to='register'>Register</Link>
             </div>
         }
         </>
