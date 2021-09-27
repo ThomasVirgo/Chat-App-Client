@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Nav } from '../../layout'
-import { UserCard } from '../../components';
-import { getAllUsers, getFriendRequests } from '../../requests';
+import { UserCard, RequestCard } from '../../components';
+import { getAllUsers, getFriendRequests, getFriends } from '../../requests';
 
 const Friends = () => {
     const [users, setUsers] = useState([])
     const [friendRequests, setFriendRequests] = useState([])
+    const [friends, setFriends] = useState([])
     useEffect(async ()=>{
         const userList = await getAllUsers();
         const requestsList = await getFriendRequests(localStorage.getItem('username'))
-        console.log(userList)
+        const friendList = await getFriends(localStorage.getItem('user_id'))
         setUsers(userList)
         setFriendRequests(requestsList)
-        console.log(requestsList)
+        setFriends(friendList)
     }, [])
 
     const firstName = localStorage.getItem('first_name')
@@ -29,16 +30,18 @@ const Friends = () => {
 
     const userCards = users.map((item,idx)=> {
         if (item.first_name != firstName && item.last_name != lastName){
-            return <div key={idx} style={userCardStyle}><UserCard data={item}/></div>
+            return <div key={idx} style={userCardStyle}><UserCard data={item} friend={false}/></div>
         }
     })
-    const requestsCards = friendRequests.map((item, idx)=><div key={idx} style={userCardStyle}>{item.request_name}</div>)
+    const requestsCards = friendRequests.map((item, idx)=><div key={idx} style={userCardStyle}><RequestCard data={item}/></div>)
+    const friendCards = friends.map((item,idx)=><div key={idx} style={userCardStyle}><UserCard data={item} friend={true}/></div>)
     return (
         <>
         <Nav/>
-        <h1>All Users:</h1>
+        <h1>Add a friend:</h1>
         {userCards}
         <h1>Your friends list:</h1>
+        {friendCards}
         <h1>Friend Requests:</h1>
         {requestsCards}
         </>

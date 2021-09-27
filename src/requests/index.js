@@ -55,5 +55,23 @@ async function getFriendRequests(username){
     }
 }
 
+async function RespondToFriendRequest(data, id){
+    try {
+        const response = await axios.patch(`${SERVER_URL}/api/friend-request/${id}`, data)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+async function getFriends(id){
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/friends/${id}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
-export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests }
+
+
+export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests, RespondToFriendRequest, getFriends }

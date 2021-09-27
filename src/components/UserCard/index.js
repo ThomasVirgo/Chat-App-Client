@@ -1,7 +1,7 @@
 import React from 'react';
 import { sendFriendRequest } from '../../requests';
 
-const UserCard = ({data}) => {
+const UserCard = ({data, friend}) => {
 
     async function handleFriendRequest(e){
         const response = await sendFriendRequest({
@@ -13,7 +13,10 @@ const UserCard = ({data}) => {
     return (
         <>
         <h1>{`${data.first_name} ${data.last_name}`}</h1>
-        <button onClick = {handleFriendRequest}>Add Friend</button>
+        {friend ? 
+            <button> Send Message </button> : 
+            <button onClick = {handleFriendRequest}>Add Friend</button>
+        }
         </>
     )
 }
