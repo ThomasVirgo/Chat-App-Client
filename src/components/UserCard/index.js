@@ -1,8 +1,11 @@
 import React from 'react';
 
-const UserCard = () => {
+const UserCard = ({data}) => {
     return (
-        <h1>User Card ... </h1>
+        <>
+        <h1>{`${data.first_name} ${data.last_name}`}</h1>
+        <button>Add Friend</button>
+        </>
     )
 }
 

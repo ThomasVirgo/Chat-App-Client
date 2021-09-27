@@ -28,5 +28,14 @@ async function getUserData(username){
     }
 }
 
+async function getAllUsers(){
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/users`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
-export { requestRegister, requestLogin, getUserData }
+
+export { requestRegister, requestLogin, getUserData, getAllUsers }
