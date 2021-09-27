@@ -45,6 +45,8 @@ const RegisterForm = () => {
         setEmail('')
         setPassword('')
         setConfirmPassword('')
+        setFirstName('')
+        setLastName('')
     }
 
     const errorList = errors.map((error,index) => <li key={index}>{error}</li>)

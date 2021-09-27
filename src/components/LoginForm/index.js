@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { requestLogin } from '../../requests'
+import { requestLogin, getUserData } from '../../requests'
 import { Link, useHistory } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core'
 import Icon from '@material-ui/core/Icon';
@@ -23,7 +23,11 @@ const LoginForm = () => {
         e.preventDefault()
         const [ isSuccess, response ]  = await requestLogin({username:email, password})
         if (isSuccess){
+            const userInfo = await getUserData(email)
+            console.log(userInfo)
             localStorage.setItem('username', email)
+            localStorage.setItem('first_name', userInfo.first_name)
+            localStorage.setItem('last_name', userInfo.last_name)
             localStorage.setItem('token', response.token)
             history.push('/dashboard')
         } else {

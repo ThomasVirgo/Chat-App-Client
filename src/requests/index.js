@@ -19,5 +19,14 @@ async function requestLogin(data){
     }
 }
 
+async function getUserData(username){
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/users/${username}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
-export { requestRegister, requestLogin }
+
+export { requestRegister, requestLogin, getUserData }

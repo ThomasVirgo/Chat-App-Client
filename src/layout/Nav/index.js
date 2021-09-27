@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
         <Toolbar>
           <Dropdown />
           <Typography variant="h6" className={classes.title}>
-            You're logged in as {localStorage.getItem('username')}
+            You're logged in as {localStorage.getItem('first_name')}
           </Typography>
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
         </Toolbar>
