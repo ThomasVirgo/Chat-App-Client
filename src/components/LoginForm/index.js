@@ -28,6 +28,7 @@ const LoginForm = () => {
             localStorage.setItem('username', email)
             localStorage.setItem('first_name', userInfo.first_name)
             localStorage.setItem('last_name', userInfo.last_name)
+            localStorage.setItem('user_id', userInfo.id)
             localStorage.setItem('token', response.token)
             history.push('/dashboard')
         } else {

@@ -37,5 +37,23 @@ async function getAllUsers(){
     }
 }
 
+async function sendFriendRequest(data){
+    try {
+        const response = await axios.post(`${SERVER_URL}/api/friend-requests`, data)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
-export { requestRegister, requestLogin, getUserData, getAllUsers }
+async function getFriendRequests(username){
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/friend-requests/${username}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+
+export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests }
