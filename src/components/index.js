@@ -4,3 +4,5 @@ export { default as Dropdown } from './Dropdown';
 export { default as UserCard } from './UserCard';
 export { default as RequestCard } from './RequestCard';
 export { default as FriendDropdown } from './FriendDropdown';
+export { default as MessagesContainer } from './MessagesContainer';
+export { default as MessageCard } from './MessageCard';

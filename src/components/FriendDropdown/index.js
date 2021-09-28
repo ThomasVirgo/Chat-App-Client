@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
 import { getFriends } from '../../requests';
 import { InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
 
 
-const FriendDropdown = () => {
+const FriendDropdown = ({chosenFriend, setChosenFriend}) => {
     const [friends, setFriends] = useState([])
     useEffect(async()=>{
         const friendsList = await getFriends(localStorage.getItem('user_id'))
@@ -18,6 +17,7 @@ const FriendDropdown = () => {
 
     const handleChange = (event) => {
         setFriend(event.target.value);
+        setChosenFriend(event.target.value);
         localStorage.setItem('chosen_friend', event.target.value)
     };
 

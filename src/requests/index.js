@@ -81,6 +81,15 @@ async function sendMessage(data){
     }
 }
 
+async function getChatHistory(user1_id, user2_id){
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/messages/${user1_id}/${user2_id}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
 
-export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests, RespondToFriendRequest, getFriends, sendMessage }
+
+export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests, RespondToFriendRequest, getFriends, sendMessage, getChatHistory }

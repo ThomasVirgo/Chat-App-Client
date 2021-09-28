@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Nav } from '../../layout'
-import { FriendDropdown } from '../../components';
+import { FriendDropdown, MessagesContainer } from '../../components';
 
 const Chat = () => {
+    const [chosenFriend, setChosenFriend] = useState()
+    console.log(chosenFriend)
+
     return (
         <>
         <Nav/>
-        <FriendDropdown />
+        <FriendDropdown chosenFriend = {chosenFriend} setChosenFriend = {setChosenFriend}/>
+        <MessagesContainer chosenFriend = {chosenFriend} />
         </>
     )
 }
