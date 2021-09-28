@@ -9,12 +9,18 @@ const UserCard = ({data, friend}) => {
             from_user: localStorage.getItem('username')
         })
     }
+    
+    function showData(){
+        console.log(data)
+    }
 
     return (
         <>
         <h1>{`${data.first_name} ${data.last_name}`}</h1>
         {friend ? 
-            <button> Send Message </button> : 
+            <button onClick={showData}> Send Message </button> : 
+            data.friends.includes(Number(localStorage.getItem('user_id'))) ? 
+            <p>You are friends already!</p> :
             <button onClick = {handleFriendRequest}>Add Friend</button>
         }
         </>

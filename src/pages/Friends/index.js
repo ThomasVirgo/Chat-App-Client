@@ -33,7 +33,14 @@ const Friends = () => {
             return <div key={idx} style={userCardStyle}><UserCard data={item} friend={false}/></div>
         }
     })
-    const requestsCards = friendRequests.map((item, idx)=><div key={idx} style={userCardStyle}><RequestCard data={item}/></div>)
+
+    const requestsCards = friendRequests.map((item, idx)=>
+    {
+        if (!item.is_complete){
+            return <div key={idx} style={userCardStyle}><RequestCard data={item}/></div>
+        }
+    })
+
     const friendCards = friends.map((item,idx)=><div key={idx} style={userCardStyle}><UserCard data={item} friend={true}/></div>)
     return (
         <>
