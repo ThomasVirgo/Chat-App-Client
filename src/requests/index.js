@@ -72,6 +72,15 @@ async function getFriends(id){
     }
 }
 
+async function sendMessage(data){
+    try {
+        const response = await axios.post(`${SERVER_URL}/api/messages`, data)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
 
-export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests, RespondToFriendRequest, getFriends }
+
+export { requestRegister, requestLogin, getUserData, getAllUsers, sendFriendRequest, getFriendRequests, RespondToFriendRequest, getFriends, sendMessage }

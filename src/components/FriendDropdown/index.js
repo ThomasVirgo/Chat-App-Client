@@ -1,0 +1,63 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+import { getFriends } from '../../requests';
+import { InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
+
+
+const FriendDropdown = () => {
+    const [friends, setFriends] = useState([])
+    useEffect(async()=>{
+        const friendsList = await getFriends(localStorage.getItem('user_id'))
+        setFriends(friendsList)
+        console.log(friendsList);
+    }, [])
+
+
+    const [friend, setFriend] = useState('');
+    const [open, setOpen] = useState(false);
+
+    const handleChange = (event) => {
+        setFriend(event.target.value);
+        localStorage.setItem('chosen_friend', event.target.value)
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const formStyle = {
+        margin:"20px",
+        "minWidth":"120px"
+    }
+
+    const friendItems = friends.map((item, idx) => <MenuItem value={item.id} key={idx}>{item.first_name} {item.last_name}</MenuItem>)
+
+    return (
+        <div>
+        <FormControl style={formStyle}>
+            <InputLabel id="demo-controlled-open-select-label">Friend</InputLabel>
+            <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={friend}
+            label="Age"
+            onChange={handleChange}
+            >
+            <MenuItem value="">
+                <em>None</em>
+            </MenuItem>
+            {friendItems}
+            </Select>
+        </FormControl>
+        </div>
+    );
+}
+
+export default FriendDropdown
