@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MessageCard } from '..';
-import { getChatHistory } from '../../requests';
 
-const MessagesContainer = ({chosenFriend}) => {
-    const [messages, setMessages] = useState([])
+const MessagesContainer = ({ messages }) => {
     const user_id = Number(localStorage.getItem('user_id'))
     const messagesEndRef = useRef(null)
 
@@ -15,14 +13,6 @@ const MessagesContainer = ({chosenFriend}) => {
         scrollToBottom()
       }, [messages]);
 
-    useEffect(async()=>{
-        if (chosenFriend){
-            const messageHistory = await getChatHistory(user_id, chosenFriend)
-            messageHistory.sort((a,b) => a.id - b.id)
-            setMessages(messageHistory)
-            console.log(messageHistory);
-        }
-    }, [chosenFriend])
 
     const messageCards = messages.map((item, idx) => <div key={idx}><MessageCard message={item.message} isRight={item.from_user == user_id} /></div>)
 

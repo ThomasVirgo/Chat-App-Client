@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { sendMessage } from '../../requests'
 
-const MessageForm = ({chosenFriend}) => {
+const MessageForm = ({chosenFriend, messages, setMessages}) => {
     const [message, setMessage] = useState('')
+    const user_id = localStorage.getItem('user_id')
 
     function handleChange(e){
         setMessage(e.target.value)
@@ -13,9 +14,18 @@ const MessageForm = ({chosenFriend}) => {
         e.preventDefault()
         console.log(message)
         setMessage('')
+        const newMessageObj = {
+            'from_user': user_id,
+            'to_user': chosenFriend,
+            message: message,
+            date: new Date(),
+            id: messages[messages.length-1].id + 1
+        }
+        const newMessages = [...messages, newMessageObj]
+        setMessages(newMessages)
         const response = await sendMessage({
             to_user: chosenFriend,
-            from_user: localStorage.getItem('user_id'),
+            from_user: user_id,
             message: message
         })
         console.log(response)
