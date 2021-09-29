@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Nav } from '../../layout'
-import { FriendDropdown, MessagesContainer } from '../../components';
+import { FriendDropdown, MessagesContainer, MessageForm } from '../../components';
 
 const Chat = () => {
     const [chosenFriend, setChosenFriend] = useState()
@@ -11,6 +11,7 @@ const Chat = () => {
         <Nav/>
         <FriendDropdown chosenFriend = {chosenFriend} setChosenFriend = {setChosenFriend}/>
         <MessagesContainer chosenFriend = {chosenFriend} />
+        <MessageForm chosenFriend = {chosenFriend} />
         </>
     )
 }

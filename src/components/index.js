@@ -6,3 +6,4 @@ export { default as RequestCard } from './RequestCard';
 export { default as FriendDropdown } from './FriendDropdown';
 export { default as MessagesContainer } from './MessagesContainer';
 export { default as MessageCard } from './MessageCard';
+export { default as MessageForm } from './MessageForm';

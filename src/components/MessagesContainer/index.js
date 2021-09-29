@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MessageCard } from '..';
 import { getChatHistory } from '../../requests';
 
 const MessagesContainer = ({chosenFriend}) => {
     const [messages, setMessages] = useState([])
     const user_id = Number(localStorage.getItem('user_id'))
+    const messagesEndRef = useRef(null)
+
+    function scrollToBottom(){
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+    
+    useEffect(() => {
+        scrollToBottom()
+      }, [messages]);
 
     useEffect(async()=>{
         if (chosenFriend){
@@ -24,13 +33,16 @@ const MessagesContainer = ({chosenFriend}) => {
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         background: "rgba(255, 255, 255, 0.65)",
         borderRadius: "5px",
-        width: "95vw",
-        height: "50vh"
+        width: "90vw",
+        height: "50vh",
+        overflow: "hidden",
+        overflowY: "scroll",
     }
 
     return (
         <div style={containerStyle}>
             {messageCards}
+            <div ref={messagesEndRef} />
         </div>
     )
 }
