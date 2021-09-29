@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { sendMessage } from '../../requests'
 
-const MessageForm = ({chosenFriend, messages, setMessages}) => {
+const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
     const [message, setMessage] = useState('')
     const user_id = localStorage.getItem('user_id')
 
@@ -12,7 +12,6 @@ const MessageForm = ({chosenFriend, messages, setMessages}) => {
 
     async function handleSubmit(e){
         e.preventDefault()
-        console.log(message)
         setMessage('')
         const newMessageObj = {
             'from_user': user_id,
@@ -28,7 +27,7 @@ const MessageForm = ({chosenFriend, messages, setMessages}) => {
             from_user: user_id,
             message: message
         })
-        console.log(response)
+        socket.emit('get all active sockets')
     }
 
     const inputStyle = {

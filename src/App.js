@@ -31,7 +31,7 @@ function App() {
           <Friends />
         </Route>
         <Route exact path="/chat">
-          <Chat />
+          <Chat socket = {socket}/>
         </Route>
         <Route exact path="/account">
           <Account />

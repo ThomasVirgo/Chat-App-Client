@@ -3,7 +3,7 @@ import { Nav } from '../../layout'
 import { FriendDropdown, MessagesContainer, MessageForm } from '../../components';
 import { getChatHistory } from '../../requests';
 
-const Chat = () => {
+const Chat = ({socket}) => {
     const [chosenFriend, setChosenFriend] = useState()
     const [messages, setMessages] = useState([])
     const user_id = localStorage.getItem('user_id')
@@ -23,7 +23,7 @@ const Chat = () => {
         <Nav/>
         <FriendDropdown chosenFriend = {chosenFriend} setChosenFriend = {setChosenFriend}/>
         <MessagesContainer  messages = {messages} />
-        <MessageForm chosenFriend = {chosenFriend} messages = {messages} setMessages={setMessages}/>
+        <MessageForm chosenFriend = {chosenFriend} messages = {messages} setMessages={setMessages} socket = {socket}/>
         </>
     )
 }
