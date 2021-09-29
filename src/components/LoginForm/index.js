@@ -5,7 +5,7 @@ import { TextField, Button } from '@material-ui/core'
 import Icon from '@material-ui/core/Icon';
 import './style.css'
 
-const LoginForm = () => {
+const LoginForm = ({socket}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState([])
@@ -30,6 +30,8 @@ const LoginForm = () => {
             localStorage.setItem('last_name', userInfo.last_name)
             localStorage.setItem('user_id', userInfo.id)
             localStorage.setItem('token', response.token)
+            socket.user_id = userInfo.id
+            socket.emit('user login', userInfo.id)
             history.push('/dashboard')
         } else {
             setErrors(Object.keys(response).map(key => response[key]))

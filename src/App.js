@@ -2,9 +2,16 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Home, Dashboard, Chat, Account, Friends } from './pages'
 import { LoginForm, RegisterForm } from './components'
+import { io } from "socket.io-client";
 import './style.css'
 
 function App() {
+  const socket = io('http://localhost:3000')
+  const user_id = localStorage.getItem('user_id')
+  if (user_id){
+    socket.user_id = user_id
+    socket.emit('user login', Number(user_id))
+  }
   return (
     <>
       <Switch>
@@ -12,7 +19,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/login">
-          <LoginForm />
+          <LoginForm socket = {socket} />
         </Route>
         <Route exact path="/register">
           <RegisterForm />
