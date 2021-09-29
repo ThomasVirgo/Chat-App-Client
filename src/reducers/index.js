@@ -1,10 +1,20 @@
-import { combineReducers } from 'redux';
-// import { authReducer } from './authReducer';
-// import { searchReducer } from './searchReducer';
-import { default as authReducer } from './authReducer';
-import { default as searchReducer } from './searchReducer';
+const initState = {
+  socketInfo: {},
+}
 
-export default combineReducers({
-  authReducer,
-  searchReducer,
-});
+const reducer = (state=initState, action) => {
+  switch(action.type) {
+      // case 'RESET_QUESTION_NUMBER':
+      //     return {
+      //         ...state,
+      //         gameState: {
+      //             ...state.gameState,
+      //             questionNumber: 1
+      //         }
+      //     }
+      default:
+          return state;
+  }
+}
+
+export default reducer ;
