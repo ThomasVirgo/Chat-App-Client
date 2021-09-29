@@ -1,10 +1,10 @@
-const changeState = (data) => {
+const updateSockets = (data) => {
     return {
-        type: 'CHANGE_GAME_STATE',
+        type: 'UPDATE_SOCKETS',
         payload: data
     }
 }
 
 
 
-export { changeState };
+export { updateSockets };

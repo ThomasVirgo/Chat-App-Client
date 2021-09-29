@@ -3,10 +3,16 @@ import { Switch, Route } from 'react-router-dom';
 import { Home, Dashboard, Chat, Account, Friends } from './pages'
 import { LoginForm, RegisterForm } from './components'
 import { io } from "socket.io-client";
+import { updateSockets } from './actions';
+import { useDispatch } from 'react-redux';
 import './style.css'
 
 function App() {
   const socket = io('http://localhost:3000')
+  const dispatch = useDispatch();
+  socket.on('recieve socket info', (socketInfo) => {
+    dispatch(updateSockets(socketInfo))  
+  })
   const user_id = localStorage.getItem('user_id')
   if (user_id){
     socket.user_id = user_id
