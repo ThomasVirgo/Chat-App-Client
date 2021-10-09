@@ -2,11 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Nav } from '../../layout'
 import { FriendDropdown, MessagesContainer, MessageForm } from '../../components';
 import { getChatHistory } from '../../requests';
+import { findUserId } from '../../utils';
+import { useSelector } from 'react-redux';
 
 const Chat = ({socket}) => {
     const [chosenFriend, setChosenFriend] = useState()
     const [messages, setMessages] = useState([])
     const user_id = localStorage.getItem('user_id')
+    const socketInfo = useSelector(state => state.socketInfo)
+
+    socket.on('private message', (theirSocketId, msg) => {
+        console.log('recieved message')
+        let theirUserId = findUserId(socketInfo, theirSocketId)
+        if (theirUserId == chosenFriend){
+            let newMessages = [...messages]
+            newMessages.push(
+                {
+                    "from_user": theirUserId,
+                    "to_user": user_id,
+                    "id": messages[messages.length-1].id+1,
+                    "date": new Date(),
+                    "message": msg
+                }
+            )
+            setMessages(newMessages)
+        }
+    })
 
 
     useEffect(async()=>{

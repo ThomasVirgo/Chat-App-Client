@@ -37,9 +37,12 @@ const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
         })
         socket.emit('get all active sockets')
         // check if the user is active 
-        isUserActive(socketInfo, chosenFriend)
+        let [isActive, theirSocketId] = isUserActive(socketInfo, chosenFriend)
+        console.log(isActive, theirSocketId);
         // if they are active, send them a message via socket server
+        socket.emit('private message', theirSocketId, message)
     }
+
 
     const inputStyle = {
         width: "70vw"
