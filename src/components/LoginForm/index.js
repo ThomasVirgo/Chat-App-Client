@@ -24,14 +24,13 @@ const LoginForm = ({socket}) => {
         const [ isSuccess, response ]  = await requestLogin({username:email, password})
         if (isSuccess){
             const userInfo = await getUserData(email)
-            console.log(userInfo)
             localStorage.setItem('username', email)
             localStorage.setItem('first_name', userInfo.first_name)
             localStorage.setItem('last_name', userInfo.last_name)
             localStorage.setItem('user_id', userInfo.id)
             localStorage.setItem('token', response.token)
-            socket.user_id = userInfo.id
-            socket.emit('user login', userInfo.id)
+            socket.auth = { username: userInfo.id };
+            socket.connect();
             history.push('/dashboard')
         } else {
             setErrors(Object.keys(response).map(key => response[key]))

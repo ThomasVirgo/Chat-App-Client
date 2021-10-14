@@ -41,7 +41,7 @@ const Chat = ({socket}) => {
 
     return (
         <>
-        <Nav/>
+        <Nav socket = {socket}/>
         <FriendDropdown chosenFriend = {chosenFriend} setChosenFriend = {setChosenFriend}/>
         <MessagesContainer  messages = {messages} />
         <MessageForm chosenFriend = {chosenFriend} messages = {messages} setMessages={setMessages} socket = {socket}/>

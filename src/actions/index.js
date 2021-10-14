@@ -5,6 +5,13 @@ const updateSockets = (data) => {
     }
 }
 
+const updateUsers = (user) => {
+    return {
+        type: 'UPDATE_USERS',
+        payload: user
+    }
+}
 
 
-export { updateSockets };
+
+export { updateSockets, updateUsers };

@@ -8,15 +8,19 @@ import { useDispatch } from 'react-redux';
 import './style.css'
 
 function App() {
-  const socket = io('http://localhost:3000')
+  const socket = io('http://localhost:3000', { autoConnect: false })
   const dispatch = useDispatch();
-  socket.on('recieve socket info', (socketInfo) => {
-    dispatch(updateSockets(socketInfo))  
-  })
+  socket.onAny((event, ...args) => {
+    console.log(event, args);
+  });
+  socket.on("users", (users) => {
+    users.forEach(user => console.log(user))
+  });
+  socket.on('user connected', user => console.log(user))
   const user_id = localStorage.getItem('user_id')
   if (user_id){
-    socket.user_id = user_id
-    socket.emit('user login', Number(user_id))
+    socket.auth = { username: user_id };
+    socket.connect();
   }
   return (
     <>
@@ -31,7 +35,7 @@ function App() {
           <RegisterForm />
         </Route>
         <Route exact path="/dashboard">
-          <Dashboard />
+          <Dashboard socket = {socket} />
         </Route>
         <Route exact path="/friends">
           <Friends />

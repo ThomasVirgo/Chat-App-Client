@@ -19,12 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({socket}) {
   const classes = useStyles();
   const history = useHistory()
 
   function handleLogout(){
       localStorage.clear()
+      socket.disconnect()
       history.push('/login')
   }
 

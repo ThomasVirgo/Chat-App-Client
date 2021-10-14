@@ -44,7 +44,7 @@ const Friends = () => {
     const friendCards = friends.map((item,idx)=><div key={idx} style={userCardStyle}><UserCard data={item} friend={true}/></div>)
     return (
         <>
-        <Nav/>
+        <Nav socket = {socket}/>
         <h1>Add a friend:</h1>
         {userCards}
         <h1>Your friends list:</h1>

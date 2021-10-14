@@ -1,10 +1,10 @@
 import React from 'react';
 import { Nav } from '../../layout'
 
-const Dashboard = () => {
+const Dashboard = ({socket}) => {
     return (
         <>
-        <Nav/>
+        <Nav socket = {socket}/>
         </>
     )
 }
