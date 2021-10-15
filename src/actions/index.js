@@ -5,6 +5,13 @@ const updateSockets = (data) => {
     }
 }
 
+const initUsers = (users) => {
+    return {
+        type: 'INIT_USERS',
+        payload: users,
+    }
+}
+
 const updateUsers = (user) => {
     return {
         type: 'UPDATE_USERS',
@@ -12,6 +19,12 @@ const updateUsers = (user) => {
     }
 }
 
+const removeUser = (user) => {
+    return {
+        type: 'REMOVE_USER',
+        payload: user.userID
+    }
+}
 
 
-export { updateSockets, updateUsers };
+export { updateSockets, initUsers, updateUsers, removeUser };

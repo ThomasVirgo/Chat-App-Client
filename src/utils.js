@@ -1,19 +1,21 @@
-function isUserActive(socketInfo, id){
+import { useSelector } from 'react-redux'
+
+function isUserActive(users, id){
     console.log('checking user activity')
-    for (let i=0; i<socketInfo.length; i++){
-        let current = socketInfo[i]
-        if (current['user_id'] == id){
-            return [true, current['socket_id']]
+    for (let i=0; i<users.length; i++){
+        let current = users[i]
+        if (current.userID == id){
+            return [true, current.socketId]
         }
     }
     return [false, 'unavailable']
 }
 
-function findUserId(socketInfo, socketId){
-    for (let i=0; i<socketInfo.length; i++){
-        let current = socketInfo[i]
-        if (current['socket_id'] == socketId){
-            return current['user_id']
+function findUserId(users, socketId){
+    for (let i=0; i<users.length; i++){
+        let current = users[i]
+        if (current.socketId == socketId){
+            return current.userID
         }
     }
     return false

@@ -3,7 +3,7 @@ import { Nav } from '../../layout'
 import { UserCard, RequestCard } from '../../components';
 import { getAllUsers, getFriendRequests, getFriends } from '../../requests';
 
-const Friends = () => {
+const Friends = ({socket}) => {
     const [users, setUsers] = useState([])
     const [friendRequests, setFriendRequests] = useState([])
     const [friends, setFriends] = useState([])

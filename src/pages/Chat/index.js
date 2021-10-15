@@ -9,18 +9,19 @@ const Chat = ({socket}) => {
     const [chosenFriend, setChosenFriend] = useState()
     const [messages, setMessages] = useState([])
     const user_id = localStorage.getItem('user_id')
-    const socketInfo = useSelector(state => state.socketInfo)
+    const users = useSelector(state => state.users)
 
     socket.on('private message', (theirSocketId, msg) => {
         console.log('recieved message')
-        let theirUserId = findUserId(socketInfo, theirSocketId)
+        let theirUserId = findUserId(users, theirSocketId)
         if (theirUserId == chosenFriend){
             let newMessages = [...messages]
             newMessages.push(
                 {
                     "from_user": theirUserId,
                     "to_user": user_id,
-                    "id": messages[messages.length-1].id+1,
+                    // "id": messages[messages.length-1].id+1,
+                    "id": 100,
                     "date": new Date(),
                     "message": msg
                 }

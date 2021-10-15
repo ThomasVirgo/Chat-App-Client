@@ -7,7 +7,7 @@ import { isUserActive } from '../../utils' ;
 const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
     const [message, setMessage] = useState('')
     const user_id = localStorage.getItem('user_id')
-    const socketInfo = useSelector(state => state.socketInfo)
+    const users = useSelector(state => state.users)
 
     function handleChange(e){
         setMessage(e.target.value)
@@ -35,9 +35,8 @@ const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
             from_user: user_id,
             message: message
         })
-        socket.emit('get all active sockets')
         // check if the user is active 
-        let [isActive, theirSocketId] = isUserActive(socketInfo, chosenFriend)
+        let [isActive, theirSocketId] = isUserActive(users, chosenFriend)
         console.log(isActive, theirSocketId);
         // if they are active, send them a message via socket server
         socket.emit('private message', theirSocketId, message)
