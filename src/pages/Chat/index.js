@@ -13,32 +13,23 @@ const Chat = ({socket}) => {
     const users = useSelector(state => state.users)
     const dispatch = useDispatch()
 
-    socket.on('private message', (theirSocketId, msg) => {
-        console.log('recieved message')
-        let theirUserId = findUserId(users, theirSocketId)
-        if (theirUserId == chosenFriend){
-            // let newMessages = [...messages]
-            // newMessages.push(
-            //     {
-            //         "from_user": theirUserId,
-            //         "to_user": user_id,
-            //         // "id": messages[messages.length-1].id+1,
-            //         "id": 100,
-            //         "date": new Date(),
-            //         "message": msg
-            //     }
-            // )
-            // setMessages(newMessages)
-            let newMessage = {
-                        "from_user": theirUserId,
-                        "to_user": user_id,
-                        "id": 100,
-                        "date": new Date(),
-                        "message": msg
-                    }
-            dispatch(addMessage(newMessage))
-        }
-    })
+    useEffect(()=>{
+        socket.on('private message', (theirSocketId, msg) => {
+            console.log('recieved message')
+            let theirUserId = findUserId(users, theirSocketId)
+            if (theirUserId == chosenFriend){
+                let newMessage = {
+                            "from_user": theirUserId,
+                            "to_user": user_id,
+                            "id": 100,
+                            "date": new Date(),
+                            "message": msg
+                        }
+                dispatch(addMessage(newMessage))
+            }
+        })
+    }, [chosenFriend])
+
 
 
     useEffect(async()=>{

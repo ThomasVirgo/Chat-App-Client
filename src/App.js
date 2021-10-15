@@ -3,8 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import { Home, Dashboard, Chat, Account, Friends } from './pages'
 import { LoginForm, RegisterForm } from './components'
 import { io } from "socket.io-client";
-import { updateSockets, initUsers, updateUsers, removeUser } from './actions';
-import { useDispatch } from 'react-redux';
+import { initUsers, updateUsers, removeUser } from './actions';
+import { useDispatch} from 'react-redux';
 import './style.css'
 
 function App() {

@@ -2,6 +2,7 @@ const initState = {
   socketInfo: {},
   users: [],
   messages: [],
+  chosenFriend: null,
 }
 
 const reducer = (state=initState, action) => {
@@ -45,6 +46,11 @@ const reducer = (state=initState, action) => {
           ...state,
           messages: newMessages
         }
+      case 'CHANGE_FRIEND':
+          return {
+            ...state,
+            chosenFriend: action.payload
+          }
       default:
           return state;
   }

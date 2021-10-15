@@ -40,5 +40,12 @@ const addMessage = (message) => {
     }
 }
 
+const changeFriend = (friendID) => {
+    return {
+        type: 'CHANGE_FRIEND',
+        payload: friendID
+    }
+}
 
-export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage };
+
+export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage, changeFriend };

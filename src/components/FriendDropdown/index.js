@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getFriends } from '../../requests';
 import { InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { changeFriend } from '../../actions';
 
 
 const FriendDropdown = ({chosenFriend, setChosenFriend}) => {
     const [friends, setFriends] = useState([])
+    const dispatch = useDispatch()
     useEffect(async()=>{
         const friendsList = await getFriends(localStorage.getItem('user_id'))
         setFriends(friendsList)
@@ -16,9 +19,11 @@ const FriendDropdown = ({chosenFriend, setChosenFriend}) => {
     const [open, setOpen] = useState(false);
 
     const handleChange = (event) => {
-        setFriend(event.target.value);
-        setChosenFriend(event.target.value);
-        localStorage.setItem('chosen_friend', event.target.value)
+        let chosen = event.target.value;
+        setFriend(chosen);
+        setChosenFriend(chosen);
+        localStorage.setItem('chosen_friend', chosen)
+        dispatch(changeFriend(chosen))
     };
 
     const handleClose = () => {
