@@ -26,5 +26,19 @@ const removeUser = (user) => {
     }
 }
 
+const initMessages = (messages) => {
+    return {
+        type: 'INIT_MESSAGES',
+        payload: messages,
+    }
+}
 
-export { updateSockets, initUsers, updateUsers, removeUser };
+const addMessage = (message) => {
+    return {
+        type: 'ADD_MESSAGE',
+        payload: message
+    }
+}
+
+
+export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage };

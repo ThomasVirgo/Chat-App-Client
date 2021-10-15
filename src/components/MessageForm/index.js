@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { TextField, Button } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { sendMessage } from '../../requests'
 import { isUserActive } from '../../utils' ;
+import { addMessage } from '../../actions';
 
-const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
+const MessageForm = ({chosenFriend, setMessages, socket}) => {
     const [message, setMessage] = useState('')
     const user_id = localStorage.getItem('user_id')
     const users = useSelector(state => state.users)
+    const messages = useSelector(state => state.messages)
+    const dispatch = useDispatch()
 
     function handleChange(e){
         setMessage(e.target.value)
@@ -28,8 +31,9 @@ const MessageForm = ({chosenFriend, messages, setMessages, socket}) => {
             date: new Date(),
             id: newId
         }
-        const newMessages = [...messages, newMessageObj]
-        setMessages(newMessages)
+        // const newMessages = [...messages, newMessageObj]
+        // setMessages(newMessages)
+        dispatch(addMessage(newMessageObj))
         const response = await sendMessage({
             to_user: chosenFriend,
             from_user: user_id,

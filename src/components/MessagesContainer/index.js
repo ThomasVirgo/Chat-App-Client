@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { MessageCard } from '..';
+import { useSelector } from 'react-redux';
 
-const MessagesContainer = ({ messages }) => {
+const MessagesContainer = () => {
     const user_id = Number(localStorage.getItem('user_id'))
     const messagesEndRef = useRef(null)
+    const messages = useSelector(state => state.messages)
 
     function scrollToBottom(){
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })

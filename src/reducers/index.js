@@ -1,6 +1,7 @@
 const initState = {
   socketInfo: {},
   users: [],
+  messages: [],
 }
 
 const reducer = (state=initState, action) => {
@@ -31,6 +32,18 @@ const reducer = (state=initState, action) => {
         return {
           ...state,
           users: alterUsers
+        }
+      case 'INIT_MESSAGES':
+        return {
+          ...state,
+          messages: action.payload
+        }
+      case 'ADD_MESSAGE':
+        let newMessages = [...state.messages]
+        newMessages.push(action.payload)
+        return {
+          ...state,
+          messages: newMessages
         }
       default:
           return state;
