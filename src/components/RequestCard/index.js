@@ -27,7 +27,7 @@ const RequestCard = ({data}) => {
 
     return (
         <>
-        <h1>{data.request_name}</h1>
+        <h1>{data.from_user_name}</h1>
         <button onClick = {accept}>Accept</button>
         <button onClick = {decline}>Decline</button>
         </>

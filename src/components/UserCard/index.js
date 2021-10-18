@@ -1,7 +1,7 @@
 import React from 'react';
 import { sendFriendRequest } from '../../requests';
 
-const UserCard = ({data, friend}) => {
+const UserCard = ({data, friend, is_request_pending}) => {
 
     async function handleFriendRequest(e){
         const response = await sendFriendRequest({
@@ -21,6 +21,8 @@ const UserCard = ({data, friend}) => {
             <button onClick={showData}> Send Message </button> : 
             data.friends.includes(Number(localStorage.getItem('user_id'))) ? 
             <p>You are friends already!</p> :
+            is_request_pending ? 
+            <p>Request pending ... </p> :
             <button onClick = {handleFriendRequest}>Add Friend</button>
         }
         </>

@@ -7,10 +7,14 @@ const Friends = ({socket}) => {
     const [users, setUsers] = useState([])
     const [friendRequests, setFriendRequests] = useState([])
     const [friends, setFriends] = useState([])
+
     useEffect(async ()=>{
         const userList = await getAllUsers();
         const requestsList = await getFriendRequests(localStorage.getItem('username'))
         const friendList = await getFriends(localStorage.getItem('user_id'))
+        console.log('User list: ', userList);
+        console.log('Request list: ', requestsList);
+        console.log('Friend list: ', friendList);
         setUsers(userList)
         setFriendRequests(requestsList)
         setFriends(friendList)
@@ -18,6 +22,7 @@ const Friends = ({socket}) => {
 
     const firstName = localStorage.getItem('first_name')
     const lastName = localStorage.getItem('last_name')
+    const user_id = localStorage.getItem('user_id')
 
     const userCardStyle = {
         padding: "10px",
@@ -28,20 +33,36 @@ const Friends = ({socket}) => {
         borderRadius: "5px"
     }
 
+    function checkIfRequestPending(userObj, requests){
+        let the_user_id = userObj.id
+        let idx = requests.findIndex(request => request.to_user == the_user_id)
+        if (idx != -1){
+            let request = requests[idx]
+            if (request.is_complete) {
+                return false
+            } else {
+                return true
+            }
+        }
+        return false
+    }
+
     const userCards = users.map((item,idx)=> {
         if (item.first_name != firstName && item.last_name != lastName){
-            return <div key={idx} style={userCardStyle}><UserCard data={item} friend={false}/></div>
+            let is_request_pending = checkIfRequestPending(item, friendRequests)
+            return <div key={idx} style={userCardStyle}><UserCard data={item} friend={false} is_request_pending={is_request_pending}/></div>
         }
     })
 
-    const requestsCards = friendRequests.map((item, idx)=>
+    const filterRequests = friendRequests.filter(item => item.from_user != user_id)
+    const requestsCards = filterRequests.map((item, idx)=>
     {
         if (!item.is_complete){
             return <div key={idx} style={userCardStyle}><RequestCard data={item}/></div>
         }
     })
 
-    const friendCards = friends.map((item,idx)=><div key={idx} style={userCardStyle}><UserCard data={item} friend={true}/></div>)
+    const friendCards = friends.map((item,idx)=><div key={idx} style={userCardStyle}><UserCard data={item} friend={true} is_request_pending={false}/></div>)
     return (
         <>
         <Nav socket = {socket}/>
