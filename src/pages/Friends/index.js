@@ -7,6 +7,11 @@ const Friends = ({socket}) => {
     const [users, setUsers] = useState([])
     const [friendRequests, setFriendRequests] = useState([])
     const [friends, setFriends] = useState([])
+    const [tabsOpen, setTabsOpen] = useState({
+        users: false,
+        requests: false,
+        friendsList: false
+    })
 
     useEffect(async ()=>{
         const userList = await getAllUsers();
@@ -31,6 +36,12 @@ const Friends = ({socket}) => {
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         background: "rgba(255, 255, 255, 0.65)",
         borderRadius: "5px"
+    }
+
+    function toggleTab(tab){
+        let newState = {...tabsOpen}
+        newState[tab] = !newState[tab]
+        setTabsOpen(newState)
     }
 
     function checkIfRequestPending(userObj, requests){
@@ -66,12 +77,12 @@ const Friends = ({socket}) => {
     return (
         <>
         <Nav socket = {socket}/>
-        <h1>Add a friend:</h1>
-        {userCards}
-        <h1>Your friends list:</h1>
-        {friendCards}
-        <h1>Friend Requests:</h1>
-        {requestsCards}
+        <h1>Add a friend <span onClick = {() => toggleTab('users')}>{tabsOpen.users ? '-' : '+'}</span></h1>
+        {tabsOpen.users &&  userCards}
+        <h1>Your friends list <span onClick = {() => toggleTab('friendsList')}>{tabsOpen.users ? '-' : '+'}</span></h1>
+        {tabsOpen.friendsList && friendCards}
+        <h1>Friend Requests <span onClick = {() => toggleTab('requests')}>{tabsOpen.users ? '-' : '+'}</span></h1>
+        {tabsOpen.requests && requestsCards}
         </>
     )
 }
