@@ -3,6 +3,9 @@ const initState = {
   users: [],
   messages: [],
   chosenFriend: null,
+  userList: [],
+  friendsList: [],
+  requestsList: [],
 }
 
 const reducer = (state=initState, action) => {
@@ -51,6 +54,21 @@ const reducer = (state=initState, action) => {
             ...state,
             chosenFriend: action.payload
           }
+      case 'INIT_USER_LISTS':
+        return {
+          ...state,
+          userList: action.payload.userList,
+          friendsList: action.payload.friendsList,
+          requestsList: action.payload.requestsList,
+
+        }
+      case 'ADD_FRIEND_REQUEST':
+        let newRequestsList = [...state.requestsList]
+        newRequestsList.push(action.payload)
+        return {
+          ...state,
+          requestsList: newRequestsList
+        }
       default:
           return state;
   }

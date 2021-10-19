@@ -47,5 +47,22 @@ const changeFriend = (friendID) => {
     }
 }
 
+const initUserLists = (data) => {
+    return {
+        type: 'INIT_USER_LISTS',
+        payload: data
+    }
+}
 
-export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage, changeFriend };
+const addFriendRequest = (to_user) => {
+    return {
+        type: 'ADD_FRIEND_REQUEST',
+        payload: {
+            'to_user': to_user,
+            'is_complete': false
+        }
+    }
+}
+
+
+export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage, changeFriend, initUserLists, addFriendRequest };

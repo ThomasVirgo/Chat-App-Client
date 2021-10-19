@@ -2,27 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { Nav } from '../../layout'
 import { UserCard, RequestCard } from '../../components';
 import { getAllUsers, getFriendRequests, getFriends } from '../../requests';
+import { initUserLists } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Friends = ({socket}) => {
-    const [users, setUsers] = useState([])
-    const [friendRequests, setFriendRequests] = useState([])
-    const [friends, setFriends] = useState([])
     const [tabsOpen, setTabsOpen] = useState({
         users: false,
         requests: false,
         friendsList: false
     })
+    const users = useSelector(state => state.userList)
+    const friends = useSelector(state => state.friendsList)
+    const friendRequests = useSelector(state => state.requestsList)
+    const dispatch = useDispatch()
 
     useEffect(async ()=>{
         const userList = await getAllUsers();
         const requestsList = await getFriendRequests(localStorage.getItem('username'))
         const friendList = await getFriends(localStorage.getItem('user_id'))
-        console.log('User list: ', userList);
-        console.log('Request list: ', requestsList);
-        console.log('Friend list: ', friendList);
-        setUsers(userList)
-        setFriendRequests(requestsList)
-        setFriends(friendList)
+        dispatch(initUserLists({
+            userList,
+            requestsList,
+            friendsList: friendList
+        }))
     }, [])
 
     const firstName = localStorage.getItem('first_name')
@@ -79,9 +81,9 @@ const Friends = ({socket}) => {
         <Nav socket = {socket}/>
         <h1>Add a friend <span onClick = {() => toggleTab('users')}>{tabsOpen.users ? '-' : '+'}</span></h1>
         {tabsOpen.users &&  userCards}
-        <h1>Your friends list <span onClick = {() => toggleTab('friendsList')}>{tabsOpen.users ? '-' : '+'}</span></h1>
+        <h1>Your friends list <span onClick = {() => toggleTab('friendsList')}>{tabsOpen.friendsList ? '-' : '+'}</span></h1>
         {tabsOpen.friendsList && friendCards}
-        <h1>Friend Requests <span onClick = {() => toggleTab('requests')}>{tabsOpen.users ? '-' : '+'}</span></h1>
+        <h1>Friend Requests <span onClick = {() => toggleTab('requests')}>{tabsOpen.requests ? '-' : '+'}</span></h1>
         {tabsOpen.requests && requestsCards}
         </>
     )
