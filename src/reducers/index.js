@@ -69,6 +69,18 @@ const reducer = (state=initState, action) => {
           ...state,
           requestsList: newRequestsList
         }
+      case 'COMPLETE_REQUEST':
+        let requestIdx = state.requestsList.findIndex(item => item.id == action.payload)
+        if (requestIdx != -1){
+          let newRequests = [...state.requestsList]
+          newRequests[requestIdx].is_complete = true
+          return {
+            ...state,
+            requestsList: newRequests
+          }
+        }
+        console.log('did not find friend request');
+        return state
       default:
           return state;
   }

@@ -1,7 +1,11 @@
 import React from 'react';
 import { RespondToFriendRequest } from '../../requests';
+import { useDispatch } from 'react-redux';
+import { completeRequest } from '../../actions';
 
 const RequestCard = ({data}) => {
+
+    const dispatch = useDispatch()
 
     async function accept(){
         const info = {
@@ -12,6 +16,7 @@ const RequestCard = ({data}) => {
         }
         const response = await RespondToFriendRequest(info, data.id)
         console.log(response)
+        dispatch(completeRequest(data.id))
     }
 
     async function decline(){
@@ -23,6 +28,7 @@ const RequestCard = ({data}) => {
         }
         const response = await RespondToFriendRequest(info, data.id)
         console.log(response)
+        dispatch(completeRequest(data.id))
     }
 
     return (

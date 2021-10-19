@@ -64,5 +64,12 @@ const addFriendRequest = (to_user) => {
     }
 }
 
+const completeRequest = (id) => {
+    return {
+        type: 'COMPLETE_REQUEST',
+        payload: id
+    }
+}
 
-export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage, changeFriend, initUserLists, addFriendRequest };
+
+export { updateSockets, initUsers, updateUsers, removeUser, initMessages, addMessage, changeFriend, initUserLists, addFriendRequest, completeRequest };

@@ -47,6 +47,7 @@ const Friends = ({socket}) => {
     }
 
     function checkIfRequestPending(userObj, requests){
+        if (!requests){ return }
         let the_user_id = userObj.id
         let idx = requests.findIndex(request => request.to_user == the_user_id)
         if (idx != -1){
@@ -67,8 +68,8 @@ const Friends = ({socket}) => {
         }
     })
 
-    const filterRequests = friendRequests.filter(item => item.from_user != user_id)
-    const requestsCards = filterRequests.map((item, idx)=>
+    const filterRequests = friendRequests?.filter(item => item.from_user != user_id)
+    const requestsCards = filterRequests?.map((item, idx)=>
     {
         if (!item.is_complete){
             return <div key={idx} style={userCardStyle}><RequestCard data={item}/></div>
