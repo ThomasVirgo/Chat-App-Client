@@ -8,7 +8,7 @@ import { useDispatch} from 'react-redux';
 import './style.css'
 
 function App() {
-  const socket = io('http://localhost:3000', { autoConnect: false })
+  const socket = io('https://socket-chat-appp.herokuapp.com', { autoConnect: false }) //https://socket-chat-appp.herokuapp.com  http://localhost:3000
   const dispatch = useDispatch();
 
   //SOCKET EVENTS
